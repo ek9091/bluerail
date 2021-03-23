@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 
 import { Button, Panel } from "../../shared/ui-components";
-import { Logo } from "./Logo";
+import { Logo } from "./";
 
 export const FormLayout = ({ children, nav = null }) => {
   const router = useRouter();

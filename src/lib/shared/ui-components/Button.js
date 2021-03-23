@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Icon } from "./";
+
 export function Button(props) {
   const {
     type = "button",
@@ -8,6 +10,8 @@ export function Button(props) {
     full = false,
     disabled = false,
     variant = "primary",
+    icon = null,
+    align = "center",
   } = props;
 
   let classes = "";
@@ -18,21 +22,34 @@ export function Button(props) {
       break;
 
     case "secondary":
-      classes = `bg-gray px-6 py-2 rounded`;
+      classes = `bg-gray px-6 py-2 rounded text-blue`;
       break;
 
     case "tertiary":
       classes = `px-6 py-2`;
+      break;
+
+    case "icon":
+      classes = `h-10 w-10 flex justify-center items-center bg-med-blue bg-opacity-40 rounded-full`;
+      break;
+
+    case "bare":
+      classes = ``;
   }
   const adjustments = `${full ? "w-full" : ""}`;
 
   return (
     <button
-      className={`${classes} ${adjustments}`}
+      className={`text-${align} ${classes} ${adjustments}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
     >
+      {icon !== null && (
+        <span className="mr-2 inline-block w-5 text-center">
+          <Icon size="md" color="black" icon={icon} />
+        </span>
+      )}
       {label}
     </button>
   );
