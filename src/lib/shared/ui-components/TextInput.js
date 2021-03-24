@@ -1,10 +1,10 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useState, useEffect } from "react";
 
 import { FormError } from "./FormError";
 
 export const TextInput = forwardRef((props, ref) => {
   const [isFocused, setIsFocused] = useState(false);
-  const { type, label = "", error = "" } = props;
+  const { type, label = "", error = "", value = "" } = props;
 
   const domId = label
     .toLowerCase()
@@ -16,16 +16,23 @@ export const TextInput = forwardRef((props, ref) => {
 
   const classes = `${
     isFocused
-      ? "text-sm top-0 translate-y-0 text-blue"
-      : "text-md top-1/2 -translate-y-1/2"
+      ? "text-sm top-0 translate-y-0 text-blue opacity-70"
+      : "text-md top-1/2 -translate-y-1/2 opacity-40"
   }`;
+
+  useEffect(() => {
+    if (value === "") return;
+
+    ref.current.value = value;
+    setIsFocused(true);
+  }, []);
 
   return (
     <>
       <div className="relative h-14 mb-4 bg-gray">
         <label
           htmlFor={domId}
-          className={`absolute transform px-4 pt-1 transition-all opacity-40 cursor-text ${classes}`}
+          className={`absolute transform px-4 pt-1 transition-all cursor-text ${classes}`}
         >
           {label}
         </label>

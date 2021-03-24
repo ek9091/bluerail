@@ -1,13 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-import {
-  Panel,
-  Menu,
-  MenuItem,
-  Button,
-  Icon,
-} from "../../shared/ui-components";
+import { Panel, Menu, MenuItem, Button } from "../../shared/ui-components";
 
 export const Sidenav = () => {
   const router = useRouter();
@@ -20,6 +14,7 @@ export const Sidenav = () => {
         align="left"
         variant="bare"
         onClick={() => router.push(href)}
+        active={router.pathname === href}
       />
     );
   };
@@ -28,11 +23,7 @@ export const Sidenav = () => {
     <Panel>
       <Menu vertical={true}>
         <MenuItem>
-          <Button
-            label="Request a Ride"
-            variant="secondary"
-            onClick={() => router.push("/")}
-          />
+          <Button label="Request a Ride" onClick={() => router.push("/")} />
         </MenuItem>
         <MenuItem>
           <MenuOption icon="taxi" label="Current Rides" href="/rides" />

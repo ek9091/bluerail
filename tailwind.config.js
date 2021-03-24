@@ -12,6 +12,7 @@ module.exports = {
       "med-blue": "#1766C0",
       orange: "#F4B374",
       red: "#942323",
+      green: "#21a64b",
       transparent: "transparent",
     },
     extend: {},

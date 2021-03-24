@@ -6,3 +6,4 @@ export * from "./Appbar";
 export * from "./Menu";
 export * from "./MenuItem";
 export * from "./Icon";
+export * from "./Hr";

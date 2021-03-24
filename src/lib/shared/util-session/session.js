@@ -50,8 +50,6 @@ export function createSessionMiddleware(authentication) {
     try {
       const { error, user } = await authentication(request);
 
-      console.log(error);
-
       if (error === undefined && Boolean(user)) {
         await setSession(user, response);
         request.user = user;

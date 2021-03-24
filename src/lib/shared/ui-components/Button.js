@@ -12,35 +12,38 @@ export function Button(props) {
     variant = "primary",
     icon = null,
     align = "center",
+    className = "",
+    active = false,
   } = props;
 
-  let classes = "";
+  let buttonClasses = "";
 
   switch (variant) {
     case "primary":
-      classes = `bg-blue text-white px-6 py-2 rounded`;
+      buttonClasses = `bg-blue text-white px-6 py-2 rounded`;
       break;
 
     case "secondary":
-      classes = `bg-gray px-6 py-2 rounded text-blue`;
+      buttonClasses = `bg-gray px-6 py-2 rounded text-blue`;
       break;
 
     case "tertiary":
-      classes = `px-6 py-2`;
+      buttonClasses = `px-6 py-2 ${active ? "text-blue" : ""}`;
       break;
 
     case "icon":
-      classes = `h-10 w-10 flex justify-center items-center bg-med-blue bg-opacity-40 rounded-full`;
+      buttonClasses = `h-10 w-10 flex justify-center items-center bg-med-blue bg-opacity-40 rounded-full`;
       break;
 
     case "bare":
-      classes = ``;
+      buttonClasses = `${active ? "text-blue underline" : ""}`;
+      break;
   }
   const adjustments = `${full ? "w-full" : ""}`;
 
   return (
     <button
-      className={`text-${align} ${classes} ${adjustments}`}
+      className={`text-${align} ${buttonClasses} ${adjustments} ${className}`}
       type={type}
       onClick={onClick}
       disabled={disabled}
