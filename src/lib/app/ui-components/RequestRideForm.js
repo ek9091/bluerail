@@ -30,7 +30,11 @@ export const RequestRideForm = ({ onRideRequest }) => {
     }
 
     if (!Object.keys(currentErrors).length) {
-      currentErrors = await onRideRequest({ current, destination, time });
+      currentErrors = await onRideRequest({
+        rideFrom: current,
+        rideTo: destination,
+        rideTime: time,
+      });
     }
 
     setErrors(currentErrors);
@@ -53,7 +57,7 @@ export const RequestRideForm = ({ onRideRequest }) => {
       <TextInput
         label="Enter your time to leave"
         ref={timeRef}
-        value="2:00pm"
+        value="01/01/2021 - 2:00pm"
         error={errors.time}
       />
       <div className="text-right">

@@ -6,7 +6,7 @@ export function Button(props) {
   const {
     type = "button",
     label = "",
-    onClick = null,
+    onClick = () => null,
     full = false,
     disabled = false,
     variant = "primary",
@@ -35,8 +35,16 @@ export function Button(props) {
       buttonClasses = `h-10 w-10 flex justify-center items-center bg-med-blue bg-opacity-40 rounded-full`;
       break;
 
+    case "iconSmall":
+      buttonClasses = `h-6 w-6 flex justify-center items-center bg-med-blue bg-opacity-40 rounded-full`;
+      break;
+
     case "bare":
       buttonClasses = `${active ? "text-blue underline" : ""}`;
+      break;
+
+    case "warning":
+      buttonClasses = `px-6 py-2 rounded text-red`;
       break;
   }
   const adjustments = `${full ? "w-full" : ""}`;

@@ -28,13 +28,13 @@ const VehicleTags = ({ tags = [] }) => {
 };
 
 export const DriverDetails = ({ driver, rideLength = 0 }) => {
-  const { name, location, vehicle, feePerMile } = driver;
-  const { make, model, year, tags } = vehicle;
-  const { city, state, zipCode } = location;
+  const { driverName, driverLocation, driverVehicle, driverFee } = driver;
+  const { make, model, year, tags } = driverVehicle;
+  const { city, state, zipCode } = driverLocation;
 
   return (
     <div className="p-2">
-      <h3 className="text-xl mb-4">{name}</h3>
+      <h3 className="text-xl mb-4">{driverName}</h3>
       <div className="mb-3">
         <DetailIcon icon="car" />
         {`${year} ${make} ${model}`}
@@ -45,12 +45,12 @@ export const DriverDetails = ({ driver, rideLength = 0 }) => {
       </div>
       <div className="mb-2">{<VehicleTags tags={tags} />}</div>
       <div>
-        <DetailIcon icon="money-bill" />${parseFloat(feePerMile).toFixed(2)}{" "}
+        <DetailIcon icon="money-bill" />${parseFloat(driverFee).toFixed(2)}{" "}
         /mile{" "}
         {rideLength > 0 && (
           <span className="text-green">
             {" "}
-            - ${parseInt(rideLength * feePerMile).toFixed(2)} for ride
+            - ${parseInt(rideLength * driverFee).toFixed(2)} for ride
           </span>
         )}
       </div>

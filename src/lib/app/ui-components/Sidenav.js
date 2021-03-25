@@ -26,10 +26,25 @@ export const Sidenav = () => {
           <Button label="Request a Ride" onClick={() => router.push("/")} />
         </MenuItem>
         <MenuItem>
-          <MenuOption icon="taxi" label="Current Rides" href="/rides" />
+          <MenuOption
+            icon="taxi"
+            label="Scheduled Rides"
+            href="/scheduled-rides"
+          />
         </MenuItem>
         <MenuItem>
-          <MenuOption icon="history" label="Ride History" href="/history" />
+          <MenuOption
+            icon="history"
+            label="Ride History"
+            href="/ride-history"
+          />
+        </MenuItem>
+        <MenuItem>
+          <MenuOption
+            icon="file"
+            label="Become a Driver"
+            href="/driver-application"
+          />
         </MenuItem>
         <MenuItem separate>
           <h2 className="text-xs uppercase text-med-gray">Driver options</h2>
@@ -52,6 +67,9 @@ export const Sidenav = () => {
             label="Driver Requests"
             href="/requests"
           />
+        </MenuItem>
+        <MenuItem>
+          <MenuOption icon="users" label="Employees" href="/employees" />
         </MenuItem>
       </Menu>
     </Panel>

@@ -1,9 +1,13 @@
 [
   {
     "id": 1,
-    "name": "John Smith",
-    "location": { "city": "Shippensburg", "state": "PA", "zipCode": "17257" },
-    "vehicle": {
+    "driverName": "John Smith",
+    "driverLocation": {
+      "city": "Shippensburg",
+      "state": "PA",
+      "zipCode": "17257"
+    },
+    "driverVehicle": {
       "make": "Mercedes",
       "model": "E 350",
       "year": "2020",
@@ -18,30 +22,38 @@
         "smooth ride"
       ]
     },
-    "feePerMile": 0.5
+    "driverFee": 0.5
   },
   {
     "id": 2,
-    "name": "Abraham Lincoln",
-    "location": { "city": "Shippensburg", "state": "PA", "zipCode": "17257" },
-    "vehicle": {
+    "driverName": "Abraham Lincoln",
+    "driverLocation": {
+      "city": "Shippensburg",
+      "state": "PA",
+      "zipCode": "17257"
+    },
+    "driverVehicle": {
       "make": "Lincoln",
       "model": "MKZ",
       "year": "2020",
       "tags": ["luxury", "presidential"]
     },
-    "feePerMile": 2.0
+    "driverFee": 2.0
   },
   {
     "id": 3,
-    "name": "Mr. Anderson",
-    "location": { "city": "Shippensburg", "state": "PA", "zipCode": "17257" },
-    "vehicle": {
+    "driverName": "Mr. Anderson",
+    "driverLocation": {
+      "city": "Shippensburg",
+      "state": "PA",
+      "zipCode": "17257"
+    },
+    "driverVehicle": {
       "make": "Lincoln",
       "model": "Continental",
       "year": "1965",
       "tags": ["clean"]
     },
-    "feePerMile": 1.0
+    "driverFee": 1.0
   }
 ]

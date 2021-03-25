@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 
 import { Panel, Button } from "../lib/shared/ui-components";
 import {
@@ -11,7 +10,7 @@ import {
 
 import { useDrivers } from "../lib/app/util-hooks";
 
-export function Home() {
+export function RequestRide() {
   const [criteria, setCriteria] = useState(null);
   const [selectedDriver, setSelectedDriver] = useState(null);
   const { drivers } = useDrivers(criteria);
@@ -64,7 +63,19 @@ export function Home() {
             <h2 className="text-xl mb-6">Your ride request</h2>
             <RideDetails
               data={{ ...criteria, rideLength, driver: { ...selectedDriver } }}
+              longform
             />
+            <p className="text-center text-red mt-10 mb-4">
+              Add payment processing here
+            </p>
+            <p className="mb-8">
+              Driver will only get charged after the ride has been completed.
+              This allows the opportunity to either cancel or make changes to
+              the requested ride.
+            </p>
+            <div className="text-right">
+              <Button label="Confirm Request" />
+            </div>
           </Panel>
         </Panel>
       )}
@@ -72,4 +83,4 @@ export function Home() {
   );
 }
 
-export default Home;
+export default RequestRide;
