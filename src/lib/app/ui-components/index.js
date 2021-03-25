@@ -10,3 +10,4 @@ export * from "./RequestRideForm";
 export * from "./DriverDetails";
 export * from "./AvailableDrivers";
 export * from "./RideDetails";
+export * from "./RideRequest";

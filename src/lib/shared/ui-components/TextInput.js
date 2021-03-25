@@ -29,7 +29,7 @@ export const TextInput = forwardRef((props, ref) => {
 
   return (
     <>
-      <div className="relative h-14 mb-4 bg-gray">
+      <div className="relative h-14 mb-4 bg-gray rounded-md">
         <label
           htmlFor={domId}
           className={`absolute transform px-4 pt-1 transition-all cursor-text ${classes}`}

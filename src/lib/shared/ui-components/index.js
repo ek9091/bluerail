@@ -8,3 +8,4 @@ export * from "./MenuItem";
 export * from "./Icon";
 export * from "./Hr";
 export * from "./Modal";
+export * from "./Textarea";
