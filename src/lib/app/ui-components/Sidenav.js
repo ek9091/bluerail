@@ -50,13 +50,18 @@ export const Sidenav = () => {
           <h2 className="text-xs uppercase text-med-gray">Driver options</h2>
         </MenuItem>
         <MenuItem>
-          <MenuOption icon="calendar" label="Ride Schedule" href="/schedule" />
+          <MenuOption
+            icon="calendar"
+            label="Ride Schedule"
+            href="/driver-schedule"
+          />
         </MenuItem>
         <MenuItem>
-          <MenuOption icon="car-side" label="Vehicles" href="/vehicles" />
-        </MenuItem>
-        <MenuItem>
-          <MenuOption icon="tools" label="Settings" href="/driver-settings" />
+          <MenuOption
+            icon="tools"
+            label="Driver Settings"
+            href="/driver-settings"
+          />
         </MenuItem>
         <MenuItem separate>
           <h2 className="text-xs uppercase text-med-gray">Admin options</h2>
@@ -64,12 +69,12 @@ export const Sidenav = () => {
         <MenuItem>
           <MenuOption
             icon="thumbs-up"
-            label="Driver Requests"
-            href="/requests"
+            label="Applications"
+            href="/applications"
           />
         </MenuItem>
         <MenuItem>
-          <MenuOption icon="users" label="Employees" href="/employees" />
+          <MenuOption icon="users" label="Users" href="/users" />
         </MenuItem>
       </Menu>
     </Panel>

@@ -26,8 +26,14 @@ export const RideHistory = () => {
         <RideDetails data={ride} />
         <div className="text-lg text-right">
           <span className="text-blue uppercase text-sm w-12 mr-4">Total:</span>{" "}
-          {ride.rideLength} miles x {fee} ={" "}
-          <span className="font-bold">{total}</span>
+          {ride.rideLength} miles x {fee} = {total}{" "}
+          {ride.paymentCompleted ? (
+            <span className="text-green uppercase text-sm font-bold">Paid</span>
+          ) : (
+            <span className="text-med-gray uppercase text-sm font-bold">
+              Pending
+            </span>
+          )}
         </div>
       </Panel>
     );

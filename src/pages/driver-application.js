@@ -89,7 +89,7 @@ export const DriverApplication = () => {
           <p className="mb-4">
             By hitting submit below, you agree that the information provided in
             this application is true and correct to the best of your knowledge.
-            Also you understand that any intentional dishonesty may result in
+            Also you understand that any willful dishonesty may result in
             refusal of this application or termination of future driver status.
           </p>
           <Button label="Submit Application" full />

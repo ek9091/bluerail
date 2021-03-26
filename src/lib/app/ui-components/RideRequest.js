@@ -33,7 +33,7 @@ export const RideRequest = ({ ride = null }) => {
           <Button
             variant="secondary"
             icon="long-arrow-alt-left"
-            label="Search again"
+            label="Update request"
             onClick={() => setCriteria(null)}
           />
           <h2 className="text-xl my-4 px-4">Available Drivers</h2>

@@ -3,13 +3,17 @@ import React from "react";
 import { Hr } from "../../shared/ui-components";
 import { DriverDetails } from "./";
 
-export const RideDetails = ({ data, longform = false }) => {
-  const { rideFrom, rideTo, rideTime, driver } = data;
+export const RideDetails = ({ data, longform = false, driverView }) => {
+  const { rideFrom, rideTo, rideTime, driver, studentName } = data;
 
   const DetailsRow = ({ label, value }) => {
     return (
       <p className="mb-4">
-        <span className="inline-block w-12 text-right mr-4 text-sm uppercase text-med-blue">
+        <span
+          className={`inline-block text-right mr-4 text-sm uppercase text-med-blue ${
+            driverView ? "w-16" : "w-12"
+          }`}
+        >
           {label}:
         </span>{" "}
         {value}
@@ -58,7 +62,8 @@ export const RideDetails = ({ data, longform = false }) => {
   return (
     <>
       {rideDetails}
-      {driverDetails}
+      {!driverView && driverDetails}
+      {driverView && <DetailsRow label="Student" value={studentName} />}
     </>
   );
 };

@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "studentName": "Marco Polo",
     "rideFrom": "1871 Old Main Dr, Shippensburg, PA 17257",
     "rideTo": "100 Conestoga Dr, Shippensburg, PA 17257",
     "rideTime": "03-30-2021 - 2:00pm",
@@ -10,10 +11,12 @@
     },
     "rideLength": 2.2,
     "total": 4.4,
-    "completed": true
+    "completed": true,
+    "paymentCompleted": true
   },
   {
     "id": 2,
+    "studentName": "George Washington",
     "rideFrom": "1871 Old Main Dr, Shippensburg, PA 17257",
     "rideTo": "359 E King St, Shippensburg, PA 17257",
     "rideTime": "03-30-2021 - 2:00pm",
@@ -23,10 +26,12 @@
     },
     "rideLength": 0.7,
     "total": 4.4,
-    "completed": true
+    "completed": true,
+    "paymentCompleted": false
   },
   {
     "id": 3,
+    "studentName": "Benjamin Franklin",
     "rideFrom": "1871 Old Main Dr, Shippensburg, PA 17257",
     "rideTo": "5440 Philadelphia Ave, Chambersburg, PA 17202",
     "rideTime": "03-30-2021 - 2:00pm",
@@ -36,10 +41,12 @@
     },
     "rideLength": 2.2,
     "total": 4.4,
-    "completed": true
+    "completed": true,
+    "paymentCompleted": false
   },
   {
     "id": 4,
+    "studentName": "Thomas Jefferson",
     "rideFrom": "1871 Old Main Dr, Shippensburg, PA 17257",
     "rideTo": "6416 Carlisle Pike, Mechanicsburg, PA 17050",
     "rideTime": "03-30-2021 - 2:00pm",
@@ -49,6 +56,7 @@
     },
     "rideLength": 2.2,
     "total": 4.4,
-    "completed": true
+    "completed": true,
+    "paymentCompleted": true
   }
 ]

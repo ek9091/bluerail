@@ -13,9 +13,9 @@ export const Topnav = () => {
   return (
     <Appbar>
       <Logo />
-      <div className="flex-grow px-4 max-w-3xl">
+      {/* <div className="flex-grow px-4 max-w-3xl">
         <MapSearch placeholder="Where to go..." />
-      </div>
+      </div> */}
       <Menu>
         <MenuItem>
           <Button variant="icon" label={<Icon icon="bell" />} />
