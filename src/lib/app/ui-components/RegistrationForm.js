@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useState, useEffect } from "react";
 
 import { TextInput, Button } from "../../shared/ui-components";
 
@@ -13,6 +13,7 @@ export const RegistrationForm = (props) => {
 
   const [errors, setErrors] = useState({});
   const [isPending, setIsPending] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   async function handleRegister(evt) {
     evt.preventDefault();
@@ -52,20 +53,46 @@ export const RegistrationForm = (props) => {
     }
 
     if (!Object.keys(currentErrors).length) {
-      currentErrors = await onRegister({
+      const response = await onRegister({
         firstName,
         lastName,
         email,
         password,
       });
+
+      if (response.status !== 200) return;
+
+      currentErrors = response.data;
+
+      if (Object.keys(currentErrors).length === 0) {
+        setIsSuccess(true);
+      }
     }
 
     setErrors(currentErrors);
     setIsPending(false);
   }
 
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    firstNameRef.current.value = "";
+    lastNameRef.current.value = "";
+    emailRef.current.value = "";
+    passRef.current.value = "";
+    confirmRef.current.value = "";
+  }, [isSuccess]);
+
   return (
     <form onSubmit={handleRegister}>
+      {isSuccess && (
+        <p className="text-green mb-4 text-center">
+          Your account has been created
+        </p>
+      )}
+      {errors.form && (
+        <p className="text-red mb-4 text-center">{errors.form}</p>
+      )}
       <TextInput
         label="First name"
         ref={firstNameRef}
