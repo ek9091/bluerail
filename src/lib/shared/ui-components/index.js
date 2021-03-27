@@ -9,3 +9,4 @@ export * from "./Icon";
 export * from "./Hr";
 export * from "./Modal";
 export * from "./Textarea";
+export * from "./CheckInput";

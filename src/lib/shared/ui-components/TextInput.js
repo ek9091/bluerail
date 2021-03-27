@@ -39,6 +39,7 @@ export const TextInput = forwardRef((props, ref) => {
         <input
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(ref.current.value.length > 0)}
+          onChange={() => setIsFocused(ref.current.value.length > 0)}
           type={type}
           ref={ref}
           className="h-full w-full px-4 pt-5 pb-1 bg-transparent outline-none"
