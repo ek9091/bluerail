@@ -50,7 +50,7 @@ export const RideHistory = () => {
                 <Ride ride={ride} />
               </div>
             ))}
-          <div className="text-center px-4 pt-4">
+          <div className="text-center px-4">
             <Button label="Show more Rides" variant="secondary" />
           </div>
         </Panel>

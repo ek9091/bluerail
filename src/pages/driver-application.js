@@ -16,8 +16,6 @@ export const DriverApplication = () => {
   const email = createRef();
   const work = createRef();
   const background = createRef();
-  const insuranceName = createRef();
-  const insuranceNumber = createRef();
   const license = createRef();
   const firstRefName = createRef();
   const firstRefPhone = createRef();
@@ -38,6 +36,7 @@ export const DriverApplication = () => {
             <TextInput label="Full address" ref={address} />
             <TextInput label="Primary phone number" ref={phone} />
             <TextInput label="Email address" ref={email} />
+            <TextInput label="License number" ref={license} />
           </Panel>
         </div>
         <div className="mb-4">
@@ -58,14 +57,6 @@ export const DriverApplication = () => {
               size="medium"
               ref={background}
             />
-          </Panel>
-        </div>
-        <div className="mb-4">
-          <Panel padding="3">
-            <h2 className="text-lg my-2 px-4">Insurance and License</h2>
-            <TextInput label="Name of Insurance" ref={insuranceName} />
-            <TextInput label="Insurance number" ref={insuranceNumber} />
-            <TextInput label="License number" ref={license} />
           </Panel>
         </div>
         <div className="mb-4">

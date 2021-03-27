@@ -20,11 +20,11 @@ export function Button(props) {
 
   switch (variant) {
     case "primary":
-      buttonClasses = `bg-blue text-white px-6 py-2 rounded`;
+      buttonClasses = `bg-blue text-white px-6 py-2 rounded text-sm`;
       break;
 
     case "secondary":
-      buttonClasses = `bg-gray px-6 py-2 rounded text-blue`;
+      buttonClasses = `bg-gray px-6 py-2 rounded text-blue text-sm`;
       break;
 
     case "tertiary":
@@ -44,7 +44,7 @@ export function Button(props) {
       break;
 
     case "warning":
-      buttonClasses = `px-6 py-2 rounded text-red`;
+      buttonClasses = `px-6 py-2 rounded text-red text-sm`;
       break;
   }
   const adjustments = `${full ? "w-full" : ""}`;

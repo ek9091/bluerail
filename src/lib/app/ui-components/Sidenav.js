@@ -23,7 +23,9 @@ export const Sidenav = () => {
     <Panel>
       <Menu vertical={true}>
         <MenuItem>
-          <Button label="Request a Ride" onClick={() => router.push("/")} />
+          <div className="text-center">
+            <Button label="Request a Ride" onClick={() => router.push("/")} />
+          </div>
         </MenuItem>
         <MenuItem>
           <MenuOption
@@ -67,11 +69,7 @@ export const Sidenav = () => {
           <h2 className="text-xs uppercase text-med-gray">Admin options</h2>
         </MenuItem>
         <MenuItem>
-          <MenuOption
-            icon="thumbs-up"
-            label="Applications"
-            href="/applications"
-          />
+          <MenuOption icon="thumbs-up" label="Applicants" href="/applicants" />
         </MenuItem>
         <MenuItem>
           <MenuOption icon="users" label="Users" href="/users" />
