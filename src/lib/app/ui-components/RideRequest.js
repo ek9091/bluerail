@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { useDrivers } from "../util-hooks";
 
-import { Panel, Button } from "../../shared/ui-components";
-import { RequestRideForm, AvailableDrivers, RideDetails } from ".";
+import { Panel, Button, Hr } from "../../shared/ui-components";
+import {
+  RequestRideForm,
+  AvailableDrivers,
+  RideDetails,
+  PaymentForm,
+} from "./";
 
 export const RideRequest = ({ ride = null }) => {
   const [criteria, setCriteria] = useState(null);
@@ -59,17 +64,15 @@ export const RideRequest = ({ ride = null }) => {
               data={{ ...criteria, rideLength, driver: { ...selectedDriver } }}
               longform
             />
-            <p className="text-center text-red mt-10 mb-4">
-              Add payment processing here
-            </p>
-            <p className="mb-8">
-              Driver will only get charged after the ride has been completed.
-              This allows the opportunity to either cancel or make changes to
-              the requested ride.
-            </p>
-            <div className="text-right">
-              <Button label="Confirm Request" />
-            </div>
+            <h3 className="text-med-gray uppercase text-xs mt-8">
+              Payment details
+            </h3>
+            <Hr />
+            <PaymentForm
+              amount={rideLength * selectedDriver.driverFee}
+              note="You will only be charged after you
+          have reached your destination."
+            />
           </Panel>
         </Panel>
       )}
