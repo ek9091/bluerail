@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 import { Panel, Button, Modal } from "../lib/shared/ui-components";
 import { AppLayout, RideDetails } from "../lib/app/ui-components";
 import { useRides } from "../lib/app/util-hooks";
 
 export const ScheduledRides = () => {
+  const router = useRouter();
   const { rides } = useRides();
 
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
@@ -30,7 +32,7 @@ export const ScheduledRides = () => {
                     <Button
                       label="Update Ride"
                       variant="secondary"
-                      onClick={() => setUpdateModalOpen(true)}
+                      onClick={() => router.push(`/rides/${ride.id}`)}
                     />
                   </div>
                 </Panel>

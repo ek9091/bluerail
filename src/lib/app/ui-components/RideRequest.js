@@ -9,7 +9,7 @@ import {
   PaymentForm,
 } from "./";
 
-export const RideRequest = ({ ride = null }) => {
+export const RideRequest = ({ ride = null, heading = "Request a ride" }) => {
   const [criteria, setCriteria] = useState(null);
   const [selectedDriver, setSelectedDriver] = useState(null);
   const { drivers } = useDrivers(criteria);
@@ -30,7 +30,7 @@ export const RideRequest = ({ ride = null }) => {
     <>
       {drivers.length === 0 ? (
         <Panel padding="8">
-          <h1 className="text-xl mb-4">Request a Ride</h1>
+          <h1 className="text-xl mb-4">{heading}</h1>
           <RequestRideForm onRideRequest={onRideRequest} />
         </Panel>
       ) : selectedDriver === null ? (
