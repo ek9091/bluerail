@@ -14,12 +14,10 @@ export default connect().post(async (request, response) => {
   try {
     const existing = await db("user").select("id").where({ email });
 
-    console.log(existing);
-
     if (existing.length) {
       response
         .status(200)
-        .json({ form: "Provided email address already exist" });
+        .json({ error: "Provided email address already exist" });
       return;
     }
 
@@ -31,7 +29,7 @@ export default connect().post(async (request, response) => {
     console.error(error);
 
     response.status(500).json({
-      form: "An error has occurred while trying to process your request",
+      error: "An error has occurred while trying to process your request",
     });
   }
 });

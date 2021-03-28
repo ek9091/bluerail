@@ -33,7 +33,7 @@ export async function getSession(request) {
   }
 
   try {
-    const session = await iron.unseal(cookie, iron.defaults);
+    const session = await iron.unseal(cookie, sessionSecret, iron.defaults);
 
     if (Date.now() > session.createdAt * 1000) {
       return { error: "Session has expired" };
@@ -41,24 +41,23 @@ export async function getSession(request) {
 
     return session;
   } catch (error) {
-    next(error);
+    throw new Error(error);
   }
 }
 
-export function createSessionMiddleware(authentication) {
+export function createSessionMiddleware(authenticate) {
   return async function (request, response, next) {
     try {
-      const { error, user } = await authentication(request);
+      const { error, user } = await authenticate(request);
 
-      if (error === undefined && Boolean(user)) {
+      if (error === undefined && user) {
         await setSession(user, response);
         request.user = user;
-        return next();
+      } else {
+        request.user = { error };
       }
 
-      response.status(200).json({
-        error,
-      });
+      next();
     } catch (error) {
       next(error);
     }
@@ -70,10 +69,17 @@ export function sessionMiddleware() {
     try {
       const session = await getSession(request);
 
-      if (Boolean(session)) {
+      if (session.data) {
+        request.user = session.data;
+      } else if (session.error) {
         request.user = session;
-        return next();
+      } else {
+        request.user = {
+          error: "An error has occurred while processing your request",
+        };
       }
+
+      next();
     } catch (error) {
       throw new Error(error);
     }

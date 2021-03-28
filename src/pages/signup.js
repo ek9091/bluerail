@@ -9,7 +9,13 @@ import {
 } from "../lib/app/ui-components";
 
 const handleRegister = async (formData) => {
-  return await axios.post("/api/user", formData);
+  const response = await axios.post("/api/user", formData);
+
+  if (response.data.error) {
+    return { form: response.data.error };
+  }
+
+  return {};
 };
 
 export const Signup = () => {

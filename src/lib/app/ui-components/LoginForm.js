@@ -30,7 +30,7 @@ export function LoginForm(props) {
       currentErrors.pass = "Password is required";
     }
 
-    if (currentErrors.email === undefined && currentErrors.pass === undefined) {
+    if (Object.keys(currentErrors).length === 0) {
       currentErrors = await onLogin(email, pass);
     }
 

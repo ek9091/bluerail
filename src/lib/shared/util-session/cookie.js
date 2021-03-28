@@ -30,6 +30,8 @@ export function removeCookie(name, response) {
 }
 
 export function getCookie(name, request) {
-  const cookie = request.cookie ? request.cookie : parse(req.headers.cookie);
+  const cookie = request.cookie
+    ? request.cookie
+    : parse(request?.headers?.cookie || "");
   return cookie[name] || null;
 }

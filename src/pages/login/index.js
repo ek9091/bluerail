@@ -12,19 +12,11 @@ export function Login() {
     try {
       const response = await axios.post("/api/login", { email, password });
 
-      if (response.status !== 200) {
-        console.error("An error has occurred");
-
-        return {
-          form: "An error has occurred.  Please try again later",
-        };
-      }
-
-      const { error, user } = response.data;
+      const { error } = response.data;
 
       if (error !== undefined) {
         return {
-          form: response.data.error,
+          form: error,
         };
       }
 
@@ -38,7 +30,7 @@ export function Login() {
     <Layout
       nav={<Button label="Sign up" onClick={() => router.push("/signup")} />}
     >
-      <h2 className="text-xl text-center pt-4 mb-8 font-bold">
+      <h2 className="text-xl text-center pt-4 mb-6 font-bold">
         Log into Bluerail
       </h2>
       <LoginForm onLogin={handleLogin} />

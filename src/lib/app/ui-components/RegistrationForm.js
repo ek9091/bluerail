@@ -20,6 +20,7 @@ export const RegistrationForm = (props) => {
 
     if (isPending) return;
     setIsPending(true);
+    setIsSuccess(false);
 
     const firstName = firstNameRef.current.value;
     const lastName = lastNameRef.current.value;
@@ -53,16 +54,12 @@ export const RegistrationForm = (props) => {
     }
 
     if (!Object.keys(currentErrors).length) {
-      const response = await onRegister({
+      currentErrors = await onRegister({
         firstName,
         lastName,
         email,
         password,
       });
-
-      if (response.status !== 200) return;
-
-      currentErrors = response.data;
 
       if (Object.keys(currentErrors).length === 0) {
         setIsSuccess(true);
