@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 
 import { Topnav, Sidenav } from "./";
+import { Panel } from "../../shared/ui-components";
 
 export const AppLayout = ({ children, title = "" }) => {
   return (
@@ -16,8 +17,15 @@ export const AppLayout = ({ children, title = "" }) => {
         <div className="flex-none w-56">
           <Sidenav />
         </div>
-        <div className="flex-grow px-8 pb-10">{children}</div>
-        <div className="flex-none w-56"></div>
+        <div className="flex-grow px-4 pb-10">{children}</div>
+        <div className="flex-none w-56">
+          <Panel padding="6">
+            View the login page by going to{" "}
+            <a href="/login" className="text-blue underline">
+              bluerail.evank.xyz/login
+            </a>
+          </Panel>
+        </div>
       </div>
     </>
   );
