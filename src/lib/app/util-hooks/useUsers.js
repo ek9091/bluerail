@@ -8,30 +8,30 @@ const requestError = {
   },
 };
 
-const noApplicantsErrors = {
+const noUserError = {
   error: {
-    type: "noApplicantsErrors",
+    type: "noUserError",
     message: "There is no driver available at this time",
   },
 };
 
-export const useApplicants = () => {
-  const [applicants, setApplicants] = useState([]);
+export const useUsers = () => {
+  const [users, setUsers] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    const fetchApplicants = async () => {
+    const fetchUsers = async () => {
       setIsPending(true);
 
       try {
-        const response = await axios.get("/api/applicants");
+        const response = await axios.get("/api/users");
 
         if (response.status === 200) {
           if (response.data.length === 0) {
-            setError(noApplicantsErrors);
+            setError(noUserError);
           } else {
-            setApplicants(response.data);
+            setUsers(response.data);
           }
         } else {
           setError(requestError);
@@ -44,10 +44,10 @@ export const useApplicants = () => {
       setIsPending(false);
     };
 
-    fetchApplicants();
+    fetchUsers();
   }, []);
 
-  return { error, isPending, applicants };
+  return { error, isPending, users };
 };
 
-export default useApplicants;
+export default useUsers;

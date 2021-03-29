@@ -6,7 +6,6 @@ import {
   TextInput,
   Button,
   CheckInput,
-  Icon,
 } from "../lib/shared/ui-components";
 
 const Label = ({ name }) => {

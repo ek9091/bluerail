@@ -6,7 +6,7 @@ import { Panel, Button, Hr } from "../../lib/shared/ui-components";
 import applications from "../../../data/applications.json";
 
 const Label = ({ name }) => {
-  return <h3 className="text-xs font-bold uppercase mb-2">{name}</h3>;
+  return <h3 className="text-sm font-bold mb-2">{name}</h3>;
 };
 
 const Detail = ({ label, value }) => {
@@ -32,7 +32,7 @@ export const Applicant = (props) => {
   } = props;
 
   return (
-    <Layout title="Become a Driver">
+    <Layout title="Applicant">
       <Panel color="gray" padding="3">
         <Button
           variant="secondary"
@@ -64,7 +64,7 @@ export const Applicant = (props) => {
           <Hr />
           <p className="p-2 mb-8">{background}</p>
           {references.map(({ name, phone, email }, index) => (
-            <>
+            <div key={index}>
               <h2 className="text-lg mb-4">Reference {index + 1}</h2>
               <Hr />
               <div className="flex mb-4 p-2">
@@ -76,7 +76,7 @@ export const Applicant = (props) => {
                   <Detail label="Email address" value={email} />
                 </div>
               </div>
-            </>
+            </div>
           ))}
         </Panel>
 

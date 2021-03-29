@@ -10,3 +10,5 @@ export * from "./Hr";
 export * from "./Modal";
 export * from "./Textarea";
 export * from "./CheckInput";
+export * from "./Checkbox";
+export * from "./SearchInput";

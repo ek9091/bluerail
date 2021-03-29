@@ -11,16 +11,14 @@ export const Applicants = () => {
 
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
 
-  console.log(confirmModalOpen);
-
   return (
     <>
-      <Layout>
+      <Layout title="Applicants">
         <Panel color="gray" padding="3">
           <h1 className="text-xl my-4 px-4">Applicants</h1>
           {applicants.length > 0 ? (
             applicants.map(({ id, firstName, lastName }) => (
-              <div className="mb-2">
+              <div className="mb-2" key={id}>
                 <Panel padding="2">
                   <div className="flex justify-between items-center">
                     <p className="flex-grow pl-4 font-bold">{`${firstName} ${lastName}`}</p>
