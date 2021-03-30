@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
+import { useAuth } from "../lib/app/util-hooks";
 import { Button } from "../lib/shared/ui-components";
 import {
   FormLayout as Layout,
@@ -20,6 +21,13 @@ const handleRegister = async (formData) => {
 
 export const Signup = () => {
   const router = useRouter();
+  const { isAuthenticated, isPending } = useAuth();
+
+  if (isAuthenticated) {
+    router.push("/");
+  }
+
+  if (isPending || isAuthenticated) return null;
 
   return (
     <Layout

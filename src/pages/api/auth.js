@@ -7,5 +7,7 @@ export default connect()
   .get((request, response) => {
     const { error = null } = request.user;
 
-    response.status(200).json(error !== null ? { error } : { ...request.user });
+    response
+      .status(200)
+      .json(error !== null ? { error } : { user: { ...request.user } });
   });

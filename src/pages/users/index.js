@@ -3,9 +3,12 @@ import { useRouter } from "next/router";
 
 import { AppLayout as Layout } from "../../lib/app/ui-components";
 import { Panel, Button, SearchInput } from "../../lib/shared/ui-components";
-import { useUsers } from "../../lib/app/util-hooks";
+import { useUsers, useAuth } from "../../lib/app/util-hooks";
 
 export const Users = () => {
+  const { isAuthenticated, isPending } = useAuth("/login");
+  if (isPending || !isAuthenticated) return null;
+
   const { users } = useUsers();
   const router = useRouter();
   const searchRef = createRef();

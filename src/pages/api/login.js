@@ -2,7 +2,7 @@ import connect from "next-connect";
 import bcrypt from "bcrypt";
 
 import { createSessionMiddleware } from "../../lib/shared/util-session";
-import { db } from "../../lib/app/data";
+import { db } from "../../lib/app/data-schema";
 
 const invalidError = { error: "Invalid email/password combination" };
 
@@ -36,5 +36,7 @@ export default connect()
   .use(createSessionMiddleware(authenticate))
   .post((request, response) => {
     const { error = null } = request.user;
-    response.status(200).json(error !== null ? { error } : { ...request.user });
+    response
+      .status(200)
+      .json(error !== null ? { error } : { user: request.user });
   });

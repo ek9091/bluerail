@@ -1,7 +1,7 @@
 import connect from "next-connect";
 import bcrypt from "bcrypt";
 
-import { db } from "../../lib/app/data";
+import { db } from "../../lib/app/data-schema";
 
 export default connect().post(async (request, response) => {
   const {

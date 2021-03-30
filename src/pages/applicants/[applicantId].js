@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { AppLayout as Layout } from "../../lib/app/ui-components";
 import { Panel, Button, Hr } from "../../lib/shared/ui-components";
 import applications from "../../../data/applications.json";
+import { useAuth } from "../../lib/app/util-hooks";
 
 const Label = ({ name }) => {
   return <h3 className="text-sm font-bold mb-2">{name}</h3>;
@@ -19,6 +20,9 @@ const Detail = ({ label, value }) => {
 };
 
 export const Applicant = (props) => {
+  const { isAuthenticated, isPending } = useAuth("/login");
+  if (isPending || !isAuthenticated) return null;
+
   const router = useRouter();
   const {
     firstName,

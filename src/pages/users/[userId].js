@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 
 import users from "../../../data/users.json";
 
+import { useAuth } from "../../lib/app/util-hooks";
 import { Panel, Button, Hr, Checkbox } from "../../lib/shared/ui-components";
 import { AppLayout as Layout } from "../../lib/app/ui-components";
 
@@ -11,6 +12,9 @@ const Label = ({ name }) => {
 };
 
 export const User = (props) => {
+  const { isAuthenticated, isPending } = useAuth("/login");
+  if (isPending || !isAuthenticated) return null;
+
   const router = useRouter();
   const adminRef = createRef();
   const employeeRef = createRef();
