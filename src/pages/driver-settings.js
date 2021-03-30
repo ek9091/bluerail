@@ -1,5 +1,6 @@
 import React, { createRef } from "react";
 
+import { useAuth } from "../lib/app/util-hooks";
 import { AppLayout as Layout } from "../lib/app/ui-components";
 import {
   Panel,
@@ -13,6 +14,9 @@ const Label = ({ name }) => {
 };
 
 export const DriverSettings = () => {
+  const { isAuthenticated, isPending } = useAuth("/login");
+  if (isPending || !isAuthenticated) return null;
+
   const makeRef = createRef();
   const modelRef = createRef();
   const yearRef = createRef();

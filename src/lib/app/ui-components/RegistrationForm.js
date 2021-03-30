@@ -1,4 +1,4 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useState, useEffect } from "react";
 
 import { TextInput, Button } from "../../shared/ui-components";
 
@@ -13,12 +13,14 @@ export const RegistrationForm = (props) => {
 
   const [errors, setErrors] = useState({});
   const [isPending, setIsPending] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   async function handleRegister(evt) {
     evt.preventDefault();
 
     if (isPending) return;
     setIsPending(true);
+    setIsSuccess(false);
 
     const firstName = firstNameRef.current.value;
     const lastName = lastNameRef.current.value;
@@ -58,14 +60,36 @@ export const RegistrationForm = (props) => {
         email,
         password,
       });
+
+      if (Object.keys(currentErrors).length === 0) {
+        setIsSuccess(true);
+      }
     }
 
     setErrors(currentErrors);
     setIsPending(false);
   }
 
+  useEffect(() => {
+    if (!isSuccess) return;
+
+    firstNameRef.current.value = "";
+    lastNameRef.current.value = "";
+    emailRef.current.value = "";
+    passRef.current.value = "";
+    confirmRef.current.value = "";
+  }, [isSuccess]);
+
   return (
     <form onSubmit={handleRegister}>
+      {isSuccess && (
+        <p className="text-green mb-4 text-center">
+          Your account has been created
+        </p>
+      )}
+      {errors.form && (
+        <p className="text-red mb-4 text-center">{errors.form}</p>
+      )}
       <TextInput
         label="First name"
         ref={firstNameRef}

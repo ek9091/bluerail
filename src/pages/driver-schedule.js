@@ -2,9 +2,12 @@ import React, { useState } from "react";
 
 import { Panel, Button, Modal } from "../lib/shared/ui-components";
 import { AppLayout, RideDetails } from "../lib/app/ui-components";
-import { useRides } from "../lib/app/util-hooks";
+import { useRides, useAuth } from "../lib/app/util-hooks";
 
 export const ScheduledRides = () => {
+  const { isAuthenticated, isPending } = useAuth("/login");
+  if (isPending || !isAuthenticated) return null;
+
   const { rides } = useRides();
 
   const [rejectModalOpen, setRejectModalOpen] = useState(false);

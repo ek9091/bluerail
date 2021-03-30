@@ -1,5 +1,6 @@
 import React, { createRef } from "react";
 
+import { useAuth } from "../lib/app/util-hooks";
 import { AppLayout as Layout } from "../lib/app/ui-components";
 import {
   Panel,
@@ -9,6 +10,9 @@ import {
 } from "../lib/shared/ui-components";
 
 export const DriverApplication = () => {
+  const { isAuthenticated, isPending } = useAuth("/login");
+  if (isPending || !isAuthenticated) return null;
+
   const firstName = createRef();
   const lastName = createRef();
   const address = createRef();
