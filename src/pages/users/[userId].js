@@ -13,13 +13,13 @@ const Label = ({ name }) => {
 
 export const User = (props) => {
   const { isAuthenticated, isPending } = useAuth("/login");
-  if (isPending || !isAuthenticated) return null;
-
   const router = useRouter();
   const adminRef = createRef();
   const employeeRef = createRef();
   const driverRef = createRef();
   const { firstName, lastName, lastLogin, email, phone, roles } = props;
+
+  if (isPending || !isAuthenticated) return null;
 
   return (
     <Layout title="User">
@@ -78,12 +78,45 @@ export const User = (props) => {
 };
 
 export async function getServerSideProps(context) {
-  let { userId } = context.params;
-  userId = parseInt(userId);
+  const { db } = require("../../lib/app/data-schema");
+
+  const { userId } = context.params;
+  const id = parseInt(userId);
+
+  const rows = await db("user")
+    .select(
+      "user.id as userId",
+      "first_name as firstName",
+      "last_name as lastName",
+      "email",
+      "last_login as lastLogin",
+      "role"
+    )
+    .leftJoin("role", "user.id", "=", "role.user_id")
+    .where({ "user.id": id });
+
+  if (!rows.length) {
+    return {
+      props: {
+        error: "User does not exist",
+      },
+    };
+  }
+
+  let user = { ...rows[0] };
+  user.roles = [...rows.map(({ role }) => role)];
+  delete user.role;
 
   return {
     props: {
-      ...users.find(({ id }) => userId === id),
+      ...user,
+      lastLogin: new Intl.DateTimeFormat("en-US", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      }).format(user.lastLogin),
     },
   };
 }

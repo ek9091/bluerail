@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import { AppLayout as Layout } from "../../lib/app/ui-components";
@@ -7,11 +7,11 @@ import { useUsers, useAuth } from "../../lib/app/util-hooks";
 
 export const Users = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
-  if (isPending || !isAuthenticated) return null;
-
-  const { users } = useUsers();
+  const [query, setQuery] = useState("");
+  const { users, isFetched } = useUsers(query);
   const router = useRouter();
-  const searchRef = createRef();
+
+  if (isPending || !isAuthenticated) return null;
 
   return (
     <Layout title="Users">
@@ -19,7 +19,10 @@ export const Users = () => {
         <h1 className="text-xl my-4 px-4">Users</h1>
         <div className="mb-4">
           <Panel padding="2">
-            <SearchInput ref={searchRef} placeholder="Search for user..." />
+            <SearchInput
+              placeholder="Search user by name or email address..."
+              onSearch={(query) => setQuery(query)}
+            />
           </Panel>
         </div>
         {users.length > 0 ? (
@@ -40,12 +43,16 @@ export const Users = () => {
           ))
         ) : (
           <Panel padding="3">
-            <p className="py-3 text-center">There are no users at this time.</p>
+            <p className="py-3 opacity-70 text-sm text-center">
+              {isFetched && query !== ""
+                ? "No users match that criteria"
+                : "Perform a search in the input above"}
+            </p>
           </Panel>
         )}
-        <div className="text-center px-4">
+        {/* <div className="text-center px-4">
           <Button label="Show more users" variant="secondary" />
-        </div>
+        </div> */}
       </Panel>
     </Layout>
   );

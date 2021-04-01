@@ -1,21 +1,27 @@
-import React, { forwardRef } from "react";
+import React, { useRef } from "react";
 
-export const SearchInput = forwardRef((props, ref) => {
-  const { placeholder = "" } = props;
+export const SearchInput = (props) => {
+  const { placeholder = "", onSearch = () => {} } = props;
+  const inputRef = useRef();
+
+  const handleSearch = (evt) => {
+    evt.preventDefault();
+    onSearch(inputRef.current.value);
+  };
 
   return (
-    <div className="flex items-center">
+    <form className="flex items-center" onSubmit={handleSearch}>
       <input
         type="text"
         className="flex-grow p-2 outline-none"
-        ref={ref}
         placeholder={placeholder}
+        ref={inputRef}
       />
       <div className="pr-4">
         <i className="fa fa-search" />
       </div>
-    </div>
+    </form>
   );
-});
+};
 
 export default SearchInput;

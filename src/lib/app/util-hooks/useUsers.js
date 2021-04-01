@@ -2,37 +2,30 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const requestError = {
-  error: {
-    type: "requestError",
-    message: "An error has occurred while attempting to fetch data",
-  },
+  error: "An error has occurred while attempting to fetch data",
 };
 
-const noUserError = {
-  error: {
-    type: "noUserError",
-    message: "There is no driver available at this time",
-  },
-};
-
-export const useUsers = () => {
+export const useUsers = (query = "") => {
   const [users, setUsers] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(false);
+  const [isFetched, setIsFetched] = useState(false);
 
   useEffect(() => {
+    if (query === "") return;
+
     const fetchUsers = async () => {
       setIsPending(true);
 
       try {
-        const response = await axios.get("/api/users");
+        const response = await axios.get(
+          `/api/users/search/${encodeURIComponent(query)}`
+        );
+
+        setIsFetched(true);
 
         if (response.status === 200) {
-          if (response.data.length === 0) {
-            setError(noUserError);
-          } else {
-            setUsers(response.data);
-          }
+          setUsers(response.data);
         } else {
           setError(requestError);
         }
@@ -45,9 +38,9 @@ export const useUsers = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [query]);
 
-  return { error, isPending, users };
+  return { error, isPending, users, isFetched };
 };
 
 export default useUsers;

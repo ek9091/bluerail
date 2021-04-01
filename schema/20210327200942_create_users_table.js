@@ -6,6 +6,7 @@ exports.up = function (knex) {
     table.string("email").notNullable().unique();
     table.string("hash").notNullable();
     table.integer("status", 2).defaultTo(0);
+    table.datetime("last_login").defaultTo(knex.fn.now());
     table.timestamps(true, true);
   });
 };
