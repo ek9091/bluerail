@@ -1,7 +1,15 @@
 import connect from "next-connect";
 
-import applicants from "../../../data/applications.json";
+import { db } from "../../lib/app/data-schema";
 
-export default connect().get((request, response) => {
-  response.status(200).json(applicants);
+export default connect().get(async (request, response) => {
+  const applicants = await db("user")
+    .select(
+      "first_name as firstName",
+      "last_name as lastName",
+      "application.id as applicationId"
+    )
+    .join("application", "user.id", "=", "user_id");
+
+  response.status(200).json([...applicants]);
 });

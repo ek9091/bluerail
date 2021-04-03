@@ -2,26 +2,31 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import { AppLayout as Layout } from "../../lib/app/ui-components";
-import { Panel, Button, Modal } from "../../lib/shared/ui-components";
+import { Panel, Button, Modal, Loading } from "../../lib/shared/ui-components";
 import { useApplicants, useAuth } from "../../lib/app/util-hooks";
 
 export const Applicants = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
-  if (isPending || !isAuthenticated) return null;
 
-  const { applicants } = useApplicants();
+  const { applicants, isPending: isApplicantsPending } = useApplicants();
   const router = useRouter();
 
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
+
+  if (isPending || !isAuthenticated) return null;
 
   return (
     <>
       <Layout title="Applicants">
         <Panel color="gray" padding="3">
           <h1 className="text-xl my-4 px-4">Applicants</h1>
-          {applicants.length > 0 ? (
-            applicants.map(({ id, firstName, lastName }) => (
-              <div className="mb-2" key={id}>
+          {isApplicantsPending ? (
+            <Panel>
+              <Loading />
+            </Panel>
+          ) : applicants.length > 0 ? (
+            applicants.map(({ applicationId, firstName, lastName }) => (
+              <div className="mb-2" key={applicationId}>
                 <Panel padding="2">
                   <div className="flex justify-between items-center">
                     <p className="flex-grow pl-4 font-bold">{`${firstName} ${lastName}`}</p>
@@ -34,7 +39,9 @@ export const Applicants = () => {
                       />
                       <Button
                         label="View"
-                        onClick={() => router.push(`/applicants/${id}`)}
+                        onClick={() =>
+                          router.push(`/applicants/${applicationId}`)
+                        }
                       />
                     </div>
                   </div>

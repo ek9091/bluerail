@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 
 import { AppLayout as Layout } from "../../lib/app/ui-components";
 import { Panel, Button, Hr } from "../../lib/shared/ui-components";
-import applications from "../../../data/applications.json";
 import { useAuth } from "../../lib/app/util-hooks";
 
 const Label = ({ name }) => {
@@ -29,10 +28,14 @@ export const Applicant = (props) => {
     lastName,
     license,
     email,
-    phone,
     history,
     background,
-    references,
+    ref1Name,
+    ref1Phone,
+    ref1Email,
+    ref2Name,
+    ref2Phone,
+    ref2Email,
   } = props;
 
   return (
@@ -58,7 +61,6 @@ export const Applicant = (props) => {
             </div>
             <div className="w-1/2">
               <Detail label="Email address" value={email} />
-              <Detail label="Primary phone number" value={phone} />
             </div>
           </div>
           <h2 className="text-lg mb-4">Work History</h2>
@@ -67,23 +69,29 @@ export const Applicant = (props) => {
           <h2 className="text-lg mb-4">Background</h2>
           <Hr />
           <p className="p-2 mb-8">{background}</p>
-          {references.map(({ name, phone, email }, index) => (
-            <div key={index}>
-              <h2 className="text-lg mb-4">Reference {index + 1}</h2>
-              <Hr />
-              <div className="flex mb-4 p-2">
-                <div className="w-1/2">
-                  <Detail label="Name" value={name} />
-                  <Detail label="Phone number" value={phone} />
-                </div>
-                <div className="w-1/2">
-                  <Detail label="Email address" value={email} />
-                </div>
-              </div>
+          <h2 className="text-lg mb-4">Reference 1</h2>
+          <Hr />
+          <div className="flex mb-4 p-2">
+            <div className="w-1/2">
+              <Detail label="Name" value={ref1Name} />
+              <Detail label="Phone number" value={ref1Phone} />
             </div>
-          ))}
+            <div className="w-1/2">
+              <Detail label="Email address" value={ref1Email} />
+            </div>
+          </div>
+          <h2 className="text-lg mb-4">Reference 2</h2>
+          <Hr />
+          <div className="flex mb-4 p-2">
+            <div className="w-1/2">
+              <Detail label="Name" value={ref2Name} />
+              <Detail label="Phone number" value={ref2Phone} />
+            </div>
+            <div className="w-1/2">
+              <Detail label="Email address" value={ref2Email} />
+            </div>
+          </div>
         </Panel>
-
         <div className="text-right py-4">
           <Button variant="warning" className="mr-2" label="Reject Applicant" />
           <Button variant="secondary" label="Approve Applicant" />
@@ -97,9 +105,36 @@ export async function getServerSideProps(context) {
   let { applicantId } = context.params;
   applicantId = parseInt(applicantId);
 
+  const { db } = require("../../lib/app/data-schema");
+
+  const application = await db("application")
+    .first(
+      "first_name as firstName",
+      "last_name as lastName",
+      "email",
+      "license",
+      "history",
+      "background",
+      "ref1_name as ref1Name",
+      "ref1_phone as ref1Phone",
+      "ref1_email as ref1Email",
+      "ref2_name as ref2Name",
+      "ref2_phone as ref2Phone",
+      "ref2_email as ref2Email"
+    )
+    .join("user", "user.id", "=", "user_id");
+
+  if (!application) {
+    return {
+      props: {
+        error: "Unable to locate the requesting application",
+      },
+    };
+  }
+
   return {
     props: {
-      ...applications.find(({ id }) => applicantId === id),
+      ...application,
     },
   };
 }

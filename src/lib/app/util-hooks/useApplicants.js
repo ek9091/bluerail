@@ -2,37 +2,21 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const requestError = {
-  error: {
-    type: "requestError",
-    message: "An error has occurred while attempting to fetch data",
-  },
-};
-
-const noApplicantsErrors = {
-  error: {
-    type: "noApplicantsErrors",
-    message: "There is no driver available at this time",
-  },
+  error: "An error has occurred while attempting to fetch data",
 };
 
 export const useApplicants = () => {
   const [applicants, setApplicants] = useState([]);
-  const [isPending, setIsPending] = useState(false);
+  const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchApplicants = async () => {
-      setIsPending(true);
-
       try {
         const response = await axios.get("/api/applicants");
 
         if (response.status === 200) {
-          if (response.data.length === 0) {
-            setError(noApplicantsErrors);
-          } else {
-            setApplicants(response.data);
-          }
+          setApplicants(response.data);
         } else {
           setError(requestError);
         }
@@ -44,7 +28,7 @@ export const useApplicants = () => {
       setIsPending(false);
     };
 
-    fetchApplicants();
+    setTimeout(fetchApplicants, 300);
   }, []);
 
   return { error, isPending, applicants };
