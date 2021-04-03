@@ -12,3 +12,4 @@ export * from "./Textarea";
 export * from "./CheckInput";
 export * from "./Checkbox";
 export * from "./SearchInput";
+export * from "./Loading";

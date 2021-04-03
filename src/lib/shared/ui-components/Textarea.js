@@ -13,6 +13,7 @@ export const Textarea = forwardRef((props, ref) => {
       <textarea
         className={`w-full resize-none bg-gray rounded-md p-4 outline-none ${classes}`}
         placeholder={placeholder}
+        ref={ref}
       />
       {error !== "" && <FormError message={error} />}
     </>

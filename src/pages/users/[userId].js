@@ -1,8 +1,6 @@
 import React, { createRef } from "react";
 import { useRouter } from "next/router";
 
-import users from "../../../data/users.json";
-
 import { useAuth } from "../../lib/app/util-hooks";
 import { Panel, Button, Hr, Checkbox } from "../../lib/shared/ui-components";
 import { AppLayout as Layout } from "../../lib/app/ui-components";
@@ -44,8 +42,6 @@ export const User = (props) => {
             <div className="w-1/2">
               <Label name="Email address" />
               <p className="mb-6">{email}</p>
-              <Label name="Phone number" />
-              <p className="mb-6">{phone}</p>
             </div>
           </div>
           <h2 className="text-lg mb-4">User roles</h2>

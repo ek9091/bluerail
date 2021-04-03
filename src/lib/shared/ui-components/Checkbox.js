@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from "react";
+import React, { useState, forwardRef, useEffect } from "react";
 
 export const Checkbox = forwardRef(({ id, label, checked = false }, ref) => {
   const [isChecked, setIsChecked] = useState(checked);
@@ -6,6 +6,10 @@ export const Checkbox = forwardRef(({ id, label, checked = false }, ref) => {
   function handleChange() {
     setIsChecked(ref.current.checked);
   }
+
+  useEffect(() => {
+    ref.current.checked = checked;
+  }, []);
 
   return (
     <label

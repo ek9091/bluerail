@@ -18,14 +18,7 @@ export const AppLayout = ({ children, title = "" }) => {
           <Sidenav />
         </div>
         <div className="flex-grow px-4 pb-10">{children}</div>
-        <div className="flex-none w-56">
-          <Panel padding="6">
-            View the login page by going to{" "}
-            <a href="/login" className="text-blue underline">
-              bluerail.evank.xyz/login
-            </a>
-          </Panel>
-        </div>
+        <div className="flex-none w-56"></div>
       </div>
     </>
   );
