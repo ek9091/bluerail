@@ -13,12 +13,19 @@ export default connect()
       return;
     }
 
-    const existing = await db("application").first("id").where({ user_id: id });
+    const application = await db("application")
+      .first("id", "status")
+      .where({ user_id: id });
 
-    if (existing) {
-      response.status(200).json({ exists: true });
+    if (application) {
+      const { status } = application;
+
+      response.status(200).json({
+        status:
+          status === 1 ? "APPROVED" : status === -1 ? "REJECTED" : "PENDING",
+      });
       return;
     }
 
-    response.status(200).json({ exists: false });
+    response.status(200).json({ status: "NO_APPLICATION" });
   });

@@ -94,20 +94,33 @@ export const RegistrationForm = (props) => {
         label="First name"
         ref={firstNameRef}
         error={errors.firstName}
+        id="firstName"
       />
-      <TextInput label="Last name" ref={lastNameRef} error={errors.lastName} />
-      <TextInput label="Email address" ref={emailRef} error={errors.email} />
+      <TextInput
+        label="Last name"
+        ref={lastNameRef}
+        error={errors.lastName}
+        id="lastName"
+      />
+      <TextInput
+        label="Email address"
+        ref={emailRef}
+        error={errors.email}
+        id="email"
+      />
       <TextInput
         label="Password"
         type="password"
         ref={passRef}
         error={errors.password}
+        id="password"
       />
       <TextInput
         label="Password again"
         type="password"
         ref={confirmRef}
         error={errors.confirm}
+        id="confirmPassword"
       />
       <Button label="Sign up" type="submit" full />
     </form>

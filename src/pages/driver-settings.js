@@ -49,13 +49,18 @@ export const DriverSettings = () => {
           <Label name="Vehicle" />
           <div className="flex justify-between mb-4">
             <div className="flex-grow">
-              <TextInput label="Make" ref={makeRef} value="Hyundai" />
+              <TextInput label="Make" ref={makeRef} value="Hyundai" id="make" />
             </div>
             <div className="flex-grow px-1">
-              <TextInput label="Model" ref={modelRef} value="Elantra" />
+              <TextInput
+                label="Model"
+                ref={modelRef}
+                value="Elantra"
+                id="model"
+              />
             </div>
             <div className="w-20 flex-none">
-              <TextInput label="Year" ref={yearRef} value="2020" />
+              <TextInput label="Year" ref={yearRef} value="2020" id="year" />
             </div>
           </div>
           <div className="mb-6">
@@ -69,6 +74,7 @@ export const DriverSettings = () => {
                 label="City and State"
                 ref={locationRef}
                 value="Shippensburg, PA"
+                id="serviceLocation"
               />
             </div>
             <div className="flex-none w-48">
@@ -78,6 +84,7 @@ export const DriverSettings = () => {
                 ref={distanceRef}
                 type="number"
                 value="30"
+                id="maxDistance"
               />
             </div>
           </div>
@@ -85,10 +92,10 @@ export const DriverSettings = () => {
             <Label name="Schedule" />
             <div className="flex w-2/3">
               <div className="w-1/2 pr-0.5">
-                <TextInput label="Start time" ref={startRef} />
+                <TextInput label="Start time" ref={startRef} id="startTime" />
               </div>
               <div className="w-1/2 pl-0.5">
-                <TextInput label="End time" ref={endRef} />
+                <TextInput label="End time" ref={endRef} id="endTime" />
               </div>
             </div>
             <div className="flex justify-center items-center w-2/3 px-4 mb-8">

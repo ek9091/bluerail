@@ -2,34 +2,32 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 export const useApplicationStatus = () => {
-  const [exists, setExists] = useState(null);
-  const [isPending, setIsPending] = useState(false);
+  const [status, setStatus] = useState(null);
+  const [isPending, setIsPending] = useState(true);
   const [didRequest, setDidRequest] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (isPending || didRequest) return;
-    setIsPending(true);
+    if (didRequest) return;
 
-    async function checkExisting() {
-      const response = await axios.get("/api/application/exists");
-
+    async function checkApplicationStatus() {
+      const response = await axios.get("/api/application/status");
       if (response.data.error) {
         setError(response.data.error);
       }
 
-      if (response.data.exists) {
-        setExists(response.data.exists);
+      if (response.data.status) {
+        setStatus(response.data.status);
       }
 
       setIsPending(false);
       setDidRequest(true);
     }
 
-    setTimeout(checkExisting, 300);
+    setTimeout(checkApplicationStatus, 300);
   }, [isPending, didRequest]);
 
-  return { isPending, didRequest, exists, error };
+  return { isPending, didRequest, status, error };
 };
 
 export default useApplicationStatus;

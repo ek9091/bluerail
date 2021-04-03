@@ -18,14 +18,14 @@ export const PaymentForm = (props) => {
     <form onSubmit={handlePayment}>
       <div className="flex justify-between items-center mb-2">
         <div className="w-1/2">
-          <TextInput label="Card holder" ref={cardHolder} />
-          <TextInput label="Card number" ref={cardNumber} />
+          <TextInput label="Card holder" ref={cardHolder} id="cardHolder" />
+          <TextInput label="Card number" ref={cardNumber} id="cardNumber" />
           <div className="flex">
             <div className="w-1/2 pr-1">
-              <TextInput label="Expiration" ref={cardExpire} />
+              <TextInput label="Expiration" ref={cardExpire} id="cardExpire" />
             </div>
             <div className="w-1/2 pl-1">
-              <TextInput label="CVV" ref={cardCVV} />
+              <TextInput label="CVV" ref={cardCVV} id="cardCVV" />
             </div>
           </div>
         </div>

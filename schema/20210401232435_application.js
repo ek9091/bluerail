@@ -12,6 +12,7 @@ exports.up = function (knex) {
     table.string("ref2_name", 65).notNullable();
     table.string("ref2_phone", 11);
     table.string("ref2_email", 50);
+    table.integer("status", 2).defaultTo(0);
     table.timestamps(true, true);
   });
 };

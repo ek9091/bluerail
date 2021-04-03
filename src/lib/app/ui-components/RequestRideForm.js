@@ -47,18 +47,21 @@ export const RequestRideForm = ({ onRideRequest }) => {
         ref={currentRef}
         value="1871 Old Main Dr, Shippensburg, PA 17257"
         error={errors.current}
+        id="currentLocation"
       />
       <TextInput
         label="Enter your destination"
         ref={destinationRef}
         value="100 Conestoga Dr, Shippensburg, PA 17257"
         error={errors.destination}
+        id="destination"
       />
       <TextInput
         label="Enter your time to leave"
         ref={timeRef}
         value="01/01/2021 - 2:00pm"
         error={errors.time}
+        id="leaveTime"
       />
       <div className="text-right">
         <span className="text-red mr-4">Just submit default input for now</span>

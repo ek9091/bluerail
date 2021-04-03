@@ -28,7 +28,7 @@ export const DriverApplication = () => {
   const [errors, setErrors] = useState({});
   const [isFormPending, setIsFormPending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { isPending: isApplicationPending, exists } = useApplicationStatus();
+  const { isPending: isApplicationPending, status } = useApplicationStatus();
 
   if (isPending || !isAuthenticated) return null;
 
@@ -102,8 +102,6 @@ export const DriverApplication = () => {
       }
     }
 
-    console.log(currentErrors);
-
     setErrors(currentErrors);
     setIsFormPending(false);
   }
@@ -112,7 +110,12 @@ export const DriverApplication = () => {
     <form onSubmit={handleSubmit}>
       <h1 className="text-xl my-4">Driver Application</h1>
       <h2 className="text-lg my-2">Information</h2>
-      <TextInput label="License number" ref={license} error={errors.license} />
+      <TextInput
+        label="License number"
+        ref={license}
+        error={errors.license}
+        id="license"
+      />
       <h2 className="text-lg my-2">Work History</h2>
       <Textarea
         placeholder="Enter details regarding any jobs you've had in the past..."
@@ -134,16 +137,19 @@ export const DriverApplication = () => {
           label="First and Last name"
           ref={firstRefName}
           error={errors.firstRefName}
+          id="ref1Name"
         />
         <TextInput
           label="Phone number"
           ref={firstRefPhone}
           error={errors.firstRefPhone}
+          id="ref1Phone"
         />
         <TextInput
           label="Email"
           ref={firstRefEmail}
           error={errors.firstRefEmail}
+          id="ref1Email"
         />
       </div>
       <div className="py-2">
@@ -152,13 +158,20 @@ export const DriverApplication = () => {
           label="First and Last name"
           ref={secRefName}
           error={errors.secRefName}
+          id="ref2Name"
         />
         <TextInput
           label="Phone number"
           ref={secRefPhone}
           error={errors.secRefPhone}
+          id="ref2Phone"
         />
-        <TextInput label="Email" ref={secRefEmail} error={errors.secRefEmail} />
+        <TextInput
+          label="Email"
+          ref={secRefEmail}
+          error={errors.secRefEmail}
+          id="ref2Email"
+        />
       </div>
       <p className="mb-4 px-2">
         By hitting submit below, you agree that the information provided in this
@@ -178,9 +191,19 @@ export const DriverApplication = () => {
       <Panel padding="6">
         {isApplicationPending ? (
           <Loading />
-        ) : exists ? (
+        ) : status === "APPROVED" ? (
           <p className="text-center py-20">
-            We have recieved your application and will review it soon.
+            Congratulations! Your application has been approved. Log out of your
+            account and then log back in to view your driver settings.
+          </p>
+        ) : status === "REJECTED" ? (
+          <p className="text-center py-20">
+            We are sorry to let you know that your application was not approved.
+          </p>
+        ) : status === "PENDING" ? (
+          <p className="text-center py-20">
+            We have recieved your application and will be reviewing it as soon
+            as possible. Please check again at another time.
           </p>
         ) : !isSuccess ? (
           formHtml

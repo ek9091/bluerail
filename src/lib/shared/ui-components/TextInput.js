@@ -4,15 +4,7 @@ import { FormError } from "./FormError";
 
 export const TextInput = forwardRef((props, ref) => {
   const [isFocused, setIsFocused] = useState(false);
-  const { type, label = "", error = "", value = "" } = props;
-
-  const domId = label
-    .toLowerCase()
-    .split(/\s/g)
-    .map((word, index) =>
-      index > 0 ? `${word.substr(0, 1).toUpperCase()}${word.substr(1)}` : word
-    )
-    .join("");
+  const { type, label = "", error = "", value = "", id } = props;
 
   const classes = `${
     isFocused
@@ -31,7 +23,7 @@ export const TextInput = forwardRef((props, ref) => {
     <>
       <div className="relative h-14 mb-4 bg-gray rounded-md">
         <label
-          htmlFor={domId}
+          htmlFor={id}
           className={`absolute transform px-4 pt-1 transition-all cursor-text ${classes}`}
         >
           {label}
@@ -43,7 +35,7 @@ export const TextInput = forwardRef((props, ref) => {
           type={type}
           ref={ref}
           className="h-full w-full px-4 pt-5 pb-1 bg-transparent outline-none"
-          id={domId}
+          id={id}
         />
       </div>
       {error !== "" && (

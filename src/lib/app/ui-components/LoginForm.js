@@ -41,12 +41,18 @@ export function LoginForm(props) {
   return (
     <form onSubmit={handleSubmit}>
       {errors.form !== undefined && <FormError message={errors.form} />}
-      <TextInput label="Email address" ref={emailRef} error={errors.email} />
+      <TextInput
+        label="Email address"
+        ref={emailRef}
+        error={errors.email}
+        id="email"
+      />
       <TextInput
         label="Password"
         type="password"
         ref={passRef}
         error={errors.pass}
+        id="password"
       />
       <Button
         type="submit"
