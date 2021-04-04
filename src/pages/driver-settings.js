@@ -7,6 +7,7 @@ import {
   TextInput,
   Button,
   CheckInput,
+  AddressInput,
 } from "../lib/shared/ui-components";
 
 const Label = ({ name }) => {
@@ -15,8 +16,6 @@ const Label = ({ name }) => {
 
 export const DriverSettings = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
-  if (isPending || !isAuthenticated) return null;
-
   const makeRef = createRef();
   const modelRef = createRef();
   const yearRef = createRef();
@@ -32,6 +31,8 @@ export const DriverSettings = () => {
   const fridayRef = createRef();
   const saturdayRef = createRef();
   const sundayRef = createRef();
+
+  if (isPending || !isAuthenticated) return null;
 
   return (
     <Layout title="Driver Settings">
@@ -70,12 +71,17 @@ export const DriverSettings = () => {
           <div className="flex justify-between mb-6">
             <div className="flex-grow pr-1">
               <Label name="Service Location" />
-              <TextInput
+              <AddressInput
                 label="City and State"
                 ref={locationRef}
-                value="Shippensburg, PA"
+                type="city"
                 id="serviceLocation"
+                defaultStreet="Harrisburg, PA"
+                defaultPlace="123456"
               />
+              <p className="text-xs text-center italic -mt-2">
+                Choose location from menu that appears
+              </p>
             </div>
             <div className="flex-none w-48">
               <Label name="Max driving distance" />

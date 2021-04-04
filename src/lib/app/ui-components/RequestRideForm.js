@@ -1,6 +1,6 @@
-import React, { createRef, useState } from "react";
+import React, { createRef, useState, useEffect } from "react";
 
-import { TextInput, Button } from "../../shared/ui-components";
+import { TextInput, Button, AddressInput } from "../../shared/ui-components";
 
 export const RequestRideForm = ({ onRideRequest }) => {
   const currentRef = createRef();
@@ -42,17 +42,19 @@ export const RequestRideForm = ({ onRideRequest }) => {
 
   return (
     <form onSubmit={handleRideRequest}>
-      <TextInput
+      <AddressInput
         label="Enter current location"
         ref={currentRef}
-        value="1871 Old Main Dr, Shippensburg, PA 17257"
+        defaultStreet="1871 Old Main Dr, Shippensburg, PA 17257"
+        defaultPlace="12345"
         error={errors.current}
         id="currentLocation"
       />
-      <TextInput
+      <AddressInput
         label="Enter your destination"
         ref={destinationRef}
-        value="100 Conestoga Dr, Shippensburg, PA 17257"
+        defaultStreet="100 Conestoga Dr, Shippensburg, PA 17257"
+        defaultPlace="23454343"
         error={errors.destination}
         id="destination"
       />

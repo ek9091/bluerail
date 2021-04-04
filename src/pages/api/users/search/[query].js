@@ -6,7 +6,7 @@ export default connect().get(async (request, response) => {
   const { query = "" } = request.query;
 
   if (query === "") {
-    response.status(200).json({ users: [] });
+    response.status(200).json([]);
     return;
   }
 
@@ -15,7 +15,7 @@ export default connect().get(async (request, response) => {
       .select("id", "first_name as firstName", "last_name as lastName")
       .where({ email: query });
 
-    response.status(200).json({ users });
+    response.status(200).json([...users]);
     return;
   }
 
