@@ -14,3 +14,4 @@ export * from "./Checkbox";
 export * from "./SearchInput";
 export * from "./Loading";
 export * from "./AddressInput";
+export * from "./TimeInput";
