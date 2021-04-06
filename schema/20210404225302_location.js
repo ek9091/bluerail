@@ -8,6 +8,7 @@ exports.up = function (knex) {
     table.string("zip_code", 10).nullable();
     table.decimal("latitude", 9, 7).notNullable();
     table.decimal("longitude", 9, 7).notNullable();
+    table.timestamps(true, true);
   });
 };
 

@@ -108,7 +108,6 @@ export const DriverApplication = () => {
 
   const formHtml = (
     <form onSubmit={handleSubmit}>
-      <h1 className="text-xl my-4">Driver Application</h1>
       <h2 className="text-lg my-2">Information</h2>
       <TextInput
         label="License number"
@@ -189,6 +188,7 @@ export const DriverApplication = () => {
   return (
     <Layout title="Become a Driver">
       <Panel padding="6">
+        <h1 className="text-xl my-4">Driver Application</h1>
         {isApplicationPending ? (
           <Loading />
         ) : status === "APPROVED" ? (
