@@ -15,3 +15,4 @@ export * from "./Loading";
 export * from "./AddressInput";
 export * from "./TimeInput";
 export * from "./DaysInput";
+export * from "./DateInput";

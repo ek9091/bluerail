@@ -1,5 +1,6 @@
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 import { useAuth } from "../../lib/app/util-hooks";
 import { Panel, Button, Hr, Checkbox } from "../../lib/shared/ui-components";
@@ -15,9 +16,46 @@ export const User = (props) => {
   const adminRef = createRef();
   const employeeRef = createRef();
   const driverRef = createRef();
-  const { firstName, lastName, lastLogin, email, phone, roles } = props;
+  const [success, setSuccess] = useState("");
+  const [formError, setFormError] = useState("");
+  const {
+    id = 0,
+    firstName = "",
+    lastName = "",
+    lastLogin = "",
+    email = "",
+    roles = "",
+    error = "",
+  } = props;
 
   if (isPending || !isAuthenticated) return null;
+
+  async function handleSave() {
+    const isDriver = driverRef.current.checked;
+    const isEmployee = employeeRef.current.checked;
+    const isAdministrator = adminRef.current.checked;
+
+    setFormError("");
+    setSuccess("");
+
+    try {
+      const response = await axios.post(`/api/users/${id}`, {
+        isDriver,
+        isEmployee,
+        isAdministrator,
+      });
+
+      if (response.data.error) {
+        setFormError(response.data.error);
+      }
+
+      if (response.data.success) {
+        setSuccess(response.data.success);
+      }
+    } catch (error) {
+      setFormError("An error has occurred while saving");
+    }
+  }
 
   return (
     <Layout title="User">
@@ -30,39 +68,58 @@ export const User = (props) => {
         />
         <h1 className="text-xl my-4 px-4">User</h1>
         <Panel padding="6">
-          <h2 className="text-lg mb-4">Name and Information</h2>
-          <Hr />
-          <div className="flex mb-6">
-            <div className="w-1/2">
-              <Label name="Name" />
-              <p className="mb-6">{`${firstName} ${lastName}`}</p>
-              <Label name="Last Login" />
-              <p>{lastLogin}</p>
-            </div>
-            <div className="w-1/2">
-              <Label name="Email address" />
-              <p className="mb-6">{email}</p>
-            </div>
-          </div>
-          <h2 className="text-lg mb-4">User roles</h2>
-          <Hr />
-          <div className="flex space-x-6 mb-2">
-            <Checkbox
-              label="Administrator"
-              ref={adminRef}
-              checked={roles.includes("administrator")}
-            />
-            <Checkbox
-              label="Employee"
-              ref={employeeRef}
-              checked={roles.includes("employee")}
-            />
-            <Checkbox
-              label="Driver"
-              ref={driverRef}
-              checked={roles.includes("driver")}
-            />
-          </div>
+          {error !== "" ? (
+            <p className="text-center py-4">{error}</p>
+          ) : (
+            <>
+              <h2 className="text-lg mb-4">Name and Information</h2>
+              <Hr />
+              <div className="flex mb-6">
+                <div className="w-1/2">
+                  <Label name="Name" />
+                  <p className="mb-6">{`${firstName} ${lastName}`}</p>
+                  <Label name="Last Login" />
+                  <p>{lastLogin}</p>
+                </div>
+                <div className="w-1/2">
+                  <Label name="Email address" />
+                  <p className="mb-6">{email}</p>
+                </div>
+              </div>
+              <h2 className="text-lg mb-4">User roles</h2>
+              <Hr />
+              <div className="flex space-x-6 mb-2">
+                <Checkbox
+                  label="Administrator"
+                  ref={adminRef}
+                  checked={roles.includes("administrator")}
+                />
+                <Checkbox
+                  label="Employee"
+                  ref={employeeRef}
+                  checked={roles.includes("employee")}
+                />
+                <Checkbox
+                  label="Driver"
+                  ref={driverRef}
+                  checked={roles.includes("driver")}
+                />
+              </div>
+              <div className="flex justify-between items-center pt-8">
+                <div className="flex-grow">
+                  {success !== "" && (
+                    <p className="text-center text-green">{success}</p>
+                  )}
+                  {formError !== "" && (
+                    <p className="text-center text-red">{formError}</p>
+                  )}
+                </div>
+                <div>
+                  <Button label="Save" onClick={handleSave} />
+                </div>
+              </div>
+            </>
+          )}
         </Panel>
       </Panel>
     </Layout>
@@ -101,6 +158,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      id: userId,
       ...user,
       lastLogin: new Intl.DateTimeFormat("en-US", {
         year: "numeric",

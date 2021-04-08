@@ -1,11 +1,17 @@
-import React, { createRef, useState, useEffect } from "react";
+import React, { createRef, useState } from "react";
 
-import { TextInput, Button, AddressInput } from "../../shared/ui-components";
+import {
+  Button,
+  AddressInput,
+  TimeInput,
+  DateInput,
+} from "../../shared/ui-components";
 
 export const RequestRideForm = ({ onRideRequest }) => {
   const currentRef = createRef();
   const destinationRef = createRef();
   const timeRef = createRef();
+  const dateRef = createRef();
   const [errors, setErrors] = useState({});
 
   const handleRideRequest = async (evt) => {
@@ -14,6 +20,7 @@ export const RequestRideForm = ({ onRideRequest }) => {
     const current = currentRef.current.value;
     const destination = destinationRef.current.value;
     const time = timeRef.current.value;
+    const date = dateRef.current.value;
 
     let currentErrors = {};
 
@@ -25,8 +32,12 @@ export const RequestRideForm = ({ onRideRequest }) => {
       currentErrors.destination = "Your destination is required";
     }
 
+    if (date === "") {
+      currentErrors.date = "The ride date is required";
+    }
+
     if (time === "") {
-      currentErrors.time = "Time to leave is required";
+      currentErrors.time = "The ride time is required";
     }
 
     if (!Object.keys(currentErrors).length) {
@@ -58,13 +69,14 @@ export const RequestRideForm = ({ onRideRequest }) => {
         error={errors.destination}
         id="destination"
       />
-      <TextInput
-        label="Enter your time to leave"
-        ref={timeRef}
-        value="01/01/2021 - 2:00pm"
-        error={errors.time}
-        id="leaveTime"
-      />
+      <div className="flex space-x-4">
+        <div className="w-1/2">
+          <DateInput label="Enter your ride date" ref={dateRef} />
+        </div>
+        <div className="w-1/2">
+          <TimeInput label="Enter your ride time" ref={timeRef} />
+        </div>
+      </div>
       <div className="text-right">
         <span className="text-red mr-4">Just submit default input for now</span>
         <Button type="submit" label="Find a driver" />

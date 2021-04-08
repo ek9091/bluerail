@@ -1,15 +1,11 @@
-import React, { useState, forwardRef, useEffect } from "react";
+import React, { useState, forwardRef } from "react";
 
 export const Checkbox = forwardRef(({ id, label, checked = false }, ref) => {
   const [isChecked, setIsChecked] = useState(checked);
 
-  function handleChange() {
-    setIsChecked(ref.current.checked);
+  function handleChange(evt) {
+    setIsChecked(evt.target.checked);
   }
-
-  useEffect(() => {
-    ref.current.checked = checked;
-  }, []);
 
   return (
     <label
@@ -25,6 +21,7 @@ export const Checkbox = forwardRef(({ id, label, checked = false }, ref) => {
         className="w-0 h-0 opacity-0 overflow-hidden"
         id={id}
         onChange={handleChange}
+        checked={isChecked}
         ref={ref}
       />
     </label>
