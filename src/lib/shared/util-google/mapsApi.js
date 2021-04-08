@@ -9,7 +9,6 @@ export const fetchPlaceDetails = async (placeId) => {
   );
 
   if (response.status !== 200) {
-    console.log(response);
     throw new Error("Failed to fetch google maps data");
   }
 

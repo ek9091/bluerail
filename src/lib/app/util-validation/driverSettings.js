@@ -11,7 +11,7 @@ export function validateDriverSettings(settings) {
   }
 
   if (model === "") {
-    errors.modelError = "The model is requird";
+    errors.modelError = "The model is required";
   } else if (!model.match(/^[\w\s-]+$/i)) {
     errors.modelError = "Model can only contain letters, numbers, -, or _";
   } else if (model.length > 30) {

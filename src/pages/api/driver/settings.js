@@ -55,7 +55,7 @@ export default connect()
         year,
         service_location: locationId,
         max_distance: maxDistance,
-        status,
+        status: 1,
       };
 
       if (!existing) {
@@ -93,12 +93,11 @@ export default connect()
           "place_id as placeId",
           "city",
           "state",
-          "max_distance as maxDistance"
+          "max_distance as maxDistance",
+          "status"
         )
         .join("location", "service_location", "=", "location.id")
         .where({ user_id: request.user.id });
-
-      console.log(settings);
 
       if (!settings) {
         return response.status(200).json({
@@ -109,6 +108,7 @@ export default connect()
           city: "",
           state: "",
           maxDistance: 0,
+          status: 0,
         });
       }
       return response.status(200).json({ ...settings });

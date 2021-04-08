@@ -64,10 +64,6 @@ export const User = (props) => {
             />
           </div>
         </Panel>
-        <div className="text-right py-2">
-          <Button variant="warning" label="Delete user" />
-          <Button variant="secondary" label="Reset password" />
-        </div>
       </Panel>
     </Layout>
   );

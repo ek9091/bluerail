@@ -8,7 +8,7 @@ exports.up = function (knex) {
     table.string("year", 4);
     table.integer("service_location", 1);
     table.integer("max_distance", 4);
-    table.integer("status", 1).defaultTo(0);
+    table.specificType("status", "tinyint(1)").defaultTo(0);
     table.timestamps(true, true);
   });
 };

@@ -4,7 +4,7 @@ import { Panel, Button, Modal } from "../lib/shared/ui-components";
 import { AppLayout, RideDetails } from "../lib/app/ui-components";
 import { useRides, useAuth } from "../lib/app/util-hooks";
 
-export const ScheduledRides = () => {
+export const DriverSchedule = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
 
   const { rides } = useRides();
@@ -90,4 +90,4 @@ export const ScheduledRides = () => {
   );
 };
 
-export default ScheduledRides;
+export default DriverSchedule;

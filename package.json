@@ -19,8 +19,8 @@
     "next": "^10.1.2",
     "next-connect": "^0.10.1",
     "react": "17.0.1",
-    "react-datetime": "^3.0.4",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "react-onclickoutside": "^6.10.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.2.4",

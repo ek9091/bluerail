@@ -1,6 +1,5 @@
 import { AuthProvider } from "../lib/app/data-state";
 import { GoogleMapsProvider } from "../lib/shared/util-hooks";
-import "react-datetime/css/react-datetime.css";
 import "./globals.css";
 
 function MyApp({ Component, pageProps }) {

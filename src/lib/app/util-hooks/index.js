@@ -5,3 +5,4 @@ export * from "./useUsers";
 export * from "./useAuth";
 export * from "./useApplicationStatus";
 export * from "./useDriverSettings";
+export * from "./useDriverSchedule";
