@@ -20,7 +20,7 @@ export const AvailableDrivers = ({
   onDriverSelect,
 }) => {
   return drivers.map((driver) => (
-    <div className="mb-3" key={driver.id}>
+    <div className="mb-3" key={driver.driverId}>
       <DriverCard
         driver={driver}
         onDriverSelect={onDriverSelect}

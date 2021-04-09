@@ -29,7 +29,7 @@ const VehicleTags = ({ tags = [] }) => {
 
 export const DriverDetails = ({ driver, rideLength = 0 }) => {
   const { driverName, driverLocation, driverVehicle, driverFee } = driver;
-  const { make, model, year, tags } = driverVehicle;
+  const { make, model, year, tags = [] } = driverVehicle;
   const { city, state, zipCode } = driverLocation;
 
   return (
@@ -43,7 +43,9 @@ export const DriverDetails = ({ driver, rideLength = 0 }) => {
         <DetailIcon icon="map-marker-alt" />
         {`${city}, ${state} ${zipCode}`}
       </div>
-      <div className="mb-2">{<VehicleTags tags={tags} />}</div>
+      {tags.length > 0 && (
+        <div className="mb-2">{<VehicleTags tags={tags} />}</div>
+      )}
       <div>
         <DetailIcon icon="money-bill" />${parseFloat(driverFee).toFixed(2)}{" "}
         /mile{" "}

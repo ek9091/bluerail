@@ -42,6 +42,7 @@ export default connect()
 
     const conflicts = await db("driver_schedule")
       .select("id")
+      .where({ user_id: request.user.id })
       .where(function () {
         Object.keys(scheduledDays).forEach((day) => {
           this.orWhere(day, "=", true);

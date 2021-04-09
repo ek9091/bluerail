@@ -1,5 +1,5 @@
 export function validateDriverSettings(settings) {
-  const { make, model, year, placeId, maxDistance } = settings;
+  const { make, model, year, placeId, maxDistance, driverFee } = settings;
   let errors = {};
 
   if (make === "") {
@@ -28,6 +28,11 @@ export function validateDriverSettings(settings) {
     errors.placeIdError = "A service location is required";
   } else if (!placeId.match(/^[\w\d-]+$/i)) {
     errors.placeIdError = "Service location appears to be invalid";
+  }
+
+  if (isNaN(driverFee) || driverFee < 0 || driverFee > 9.99) {
+    errors.driverFeeError =
+      "Driver fee must be a decimal from 0 to 9.99.  IE: 0.50";
   }
 
   const parsedDistance = parseInt(maxDistance);

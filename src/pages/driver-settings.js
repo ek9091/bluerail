@@ -31,6 +31,7 @@ export const DriverSettings = () => {
   const tagsRef = createRef();
   const locationRef = createRef();
   const maxDistanceRef = createRef();
+  const driverFeeRef = createRef();
   const [isPending, setIsPending] = useState(false);
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
@@ -49,6 +50,7 @@ export const DriverSettings = () => {
     const year = yearRef.current.value;
     const placeId = locationRef.current.value;
     const maxDistance = maxDistanceRef.current.value;
+    const driverFee = parseFloat(driverFeeRef.current.value);
 
     let currentErrors = validateDriverSettings({
       make,
@@ -56,6 +58,7 @@ export const DriverSettings = () => {
       year,
       placeId,
       maxDistance,
+      driverFee,
     });
 
     if (Object.keys(currentErrors).length === 0) {
@@ -65,6 +68,7 @@ export const DriverSettings = () => {
         year,
         placeId,
         maxDistance,
+        driverFee,
       });
 
       if (response.data.errors) {
@@ -186,6 +190,17 @@ export const DriverSettings = () => {
                       value={settings.maxDistance}
                       id="maxDistance"
                       error={errors.maxDistanceError}
+                    />
+                  </div>
+                </div>
+                <div className="flex">
+                  <div className="w-1/2">
+                    <Label name="Drivers fee" />
+                    <TextInput
+                      label="Fee per mile"
+                      ref={driverFeeRef}
+                      value={settings.driverFee.toFixed(2)}
+                      error={errors.driverFeeError}
                     />
                   </div>
                 </div>

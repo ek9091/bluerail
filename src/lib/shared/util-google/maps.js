@@ -16,7 +16,7 @@ export const getLocationFromAddressComponents = (address) => {
   const number = _getAddressComponentType(address, numberTypes);
   const route = _getAddressComponentType(address, streetTypes);
 
-  const streetAddress =
+  const street =
     number !== null && route !== null
       ? `${number.short_name} ${route.short_name}`
       : route !== null
@@ -28,7 +28,7 @@ export const getLocationFromAddressComponents = (address) => {
   const zipCode = _getAddressComponentType(address, zipCodeTypes);
 
   return {
-    streetAddress,
+    street,
     city: city !== null ? city.short_name : "",
     state: state !== null ? state.short_name : "",
     zipCode: zipCode !== null ? zipCode.short_name : "",

@@ -34,8 +34,14 @@ export const RideDetails = ({ data, longform = false, driverView }) => {
           <Hr />
         </>
       )}
-      <DetailsRow label="From" value={rideFrom} />
-      <DetailsRow label="To" value={rideTo} />
+      <DetailsRow
+        label="From"
+        value={`${rideFrom.street}, ${rideFrom.city} ${rideFrom.zipCode}`}
+      />
+      <DetailsRow
+        label="To"
+        value={`${rideTo.street}, ${rideTo.city} ${rideTo.zipCode}`}
+      />
       <DetailsRow label="Time" value={rideTime} />
     </>
   );

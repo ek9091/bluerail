@@ -44,6 +44,7 @@ export const RequestRideForm = ({ onRideRequest }) => {
       currentErrors = await onRideRequest({
         rideFrom: current,
         rideTo: destination,
+        rideDate: date,
         rideTime: time,
       });
     }
@@ -56,16 +57,16 @@ export const RequestRideForm = ({ onRideRequest }) => {
       <AddressInput
         label="Enter current location"
         ref={currentRef}
-        defaultStreet="1871 Old Main Dr, Shippensburg, PA 17257"
-        defaultPlace="12345"
+        defaultStreet=""
+        defaultPlace=""
         error={errors.current}
         id="currentLocation"
       />
       <AddressInput
         label="Enter your destination"
         ref={destinationRef}
-        defaultStreet="100 Conestoga Dr, Shippensburg, PA 17257"
-        defaultPlace="23454343"
+        defaultStreet=""
+        defaultPlace=""
         error={errors.destination}
         id="destination"
       />
@@ -77,8 +78,12 @@ export const RequestRideForm = ({ onRideRequest }) => {
           <TimeInput label="Enter your ride time" ref={timeRef} />
         </div>
       </div>
-      <div className="text-right">
-        <span className="text-red mr-4">Just submit default input for now</span>
+      <div className="flex justify-between items-center">
+        <div className="flex-grow">
+          {errors.formError && (
+            <p className="text-center text-red">{errors.formError}</p>
+          )}
+        </div>
         <Button type="submit" label="Find a driver" />
       </div>
     </form>

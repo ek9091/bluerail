@@ -14,13 +14,13 @@ export default connect()
       placeId = "",
       tags = [],
       maxDistance,
+      driverFee,
       status = 0,
     } = request.body;
 
     if (!request.user || !request.user.id) {
-      return response
-        .status(200)
-        .json({ formError: "Authentication is required" });
+      response.status(200).json({ formError: "Authentication is required" });
+      return;
     }
 
     const errors = validateDriverSettings({
@@ -29,10 +29,12 @@ export default connect()
       year,
       placeId,
       maxDistance,
+      driverFee,
     });
 
     if (Object.keys(errors).length) {
       response.status(200).json({ errors });
+      return;
     }
 
     try {
@@ -55,6 +57,7 @@ export default connect()
         year,
         service_location: locationId,
         max_distance: maxDistance,
+        driver_fee: driverFee,
         status: 1,
       };
 
@@ -70,6 +73,7 @@ export default connect()
       }
 
       response.status(200).json({ success: "Settings have been saved" });
+      return;
     } catch (error) {
       console.error(error);
       response.status(500).json({
@@ -94,6 +98,7 @@ export default connect()
           "city",
           "state",
           "max_distance as maxDistance",
+          "driver_fee as driverFee",
           "status"
         )
         .join("location", "service_location", "=", "location.id")
@@ -108,6 +113,7 @@ export default connect()
           city: "",
           state: "",
           maxDistance: 0,
+          driverFee: 0.0,
           status: 0,
         });
       }

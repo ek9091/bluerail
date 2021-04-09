@@ -8,6 +8,7 @@ exports.up = function (knex) {
     table.string("year", 4);
     table.integer("service_location", 1);
     table.integer("max_distance", 4);
+    table.decimal("driver_fee", 3, 2).notNullable();
     table.specificType("status", "tinyint(1)").defaultTo(0);
     table.timestamps(true, true);
   });

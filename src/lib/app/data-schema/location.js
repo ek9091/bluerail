@@ -41,3 +41,23 @@ export async function getLocationIdFromPlaceId(placeId) {
     return id;
   }
 }
+
+export async function getLocationFromPlaceId(placeId) {
+  const id = await getLocationIdFromPlaceId(placeId);
+
+  if (id === null) return null;
+
+  const place = await db("location")
+    .first(
+      "id",
+      "street",
+      "city",
+      "state",
+      "zip_code as zipCode",
+      "latitude",
+      "longitude"
+    )
+    .where({ id });
+
+  return place;
+}
