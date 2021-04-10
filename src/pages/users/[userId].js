@@ -19,7 +19,7 @@ export const User = (props) => {
   const [success, setSuccess] = useState("");
   const [formError, setFormError] = useState("");
   const {
-    id = 0,
+    userId = 0,
     firstName = "",
     lastName = "",
     lastLogin = "",
@@ -39,7 +39,8 @@ export const User = (props) => {
     setSuccess("");
 
     try {
-      const response = await axios.post(`/api/users/${id}`, {
+      const response = await axios.post(`/api/users/roles`, {
+        userId,
         isDriver,
         isEmployee,
         isAdministrator,
@@ -158,7 +159,6 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      id: userId,
       ...user,
       lastLogin: new Intl.DateTimeFormat("en-US", {
         year: "numeric",

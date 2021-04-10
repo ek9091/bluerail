@@ -72,7 +72,7 @@ export const TimeInput = forwardRef((props, ref) => {
           readOnly
         />
         {show && (
-          <div className="absolute left-0 top-0 w-56 bg-white shadow-md rounded-md py-2 text-center">
+          <div className="absolute left-0 top-0 w-56 bg-white shadow-md rounded-md py-2 text-center z-50">
             <p className="font-bold pb-2 border-b border-gray">{`${hour}:${minute} ${period}`}</p>
             <div className="flex h-56">
               <ul className="overflow-y-auto w-1/3 border-r border-gray">

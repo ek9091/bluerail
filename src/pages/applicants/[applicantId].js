@@ -206,7 +206,8 @@ export async function getServerSideProps(context) {
       "ref2_email as ref2Email",
       "status"
     )
-    .join("user", "user.id", "=", "user_id");
+    .join("user", "user.id", "=", "user_id")
+    .where("user_id", applicantId);
 
   if (!application) {
     return {

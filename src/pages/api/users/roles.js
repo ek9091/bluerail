@@ -6,7 +6,9 @@ import { db } from "../../../lib/app/data-schema";
 export default connect()
   .use(sessionMiddleware())
   .post(async (request, response) => {
-    const { isDriver, isEmployee, isAdministrator } = request.body;
+    const { userId, isDriver, isEmployee, isAdministrator } = request.body;
+
+    console.log(request);
 
     if (!request.user || !request.user.id) {
       return response
@@ -14,7 +16,7 @@ export default connect()
         .json({ formError: "Authentication is required" });
     }
 
-    await db("role").where({ user_id: request.user.id }).del();
+    await db("role").where({ user_id: userId }).del();
 
     const rolesMap = {
       administrator: isAdministrator,
@@ -29,7 +31,7 @@ export default connect()
         if (!rolesMap[role]) return;
 
         roles.push({
-          user_id: request.user.id,
+          user_id: userId,
           role,
         });
       });

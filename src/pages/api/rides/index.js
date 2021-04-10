@@ -54,7 +54,7 @@ export default connect()
 
     const { driver = 0, history = 0 } = request.query;
 
-    const as = driver ? "driver_id" : "user_id";
+    const as = driver === "true" ? "driver_id" : "user_id";
 
     try {
       const data = await db("ride")

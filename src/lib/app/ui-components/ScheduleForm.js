@@ -88,7 +88,11 @@ export const ScheduleForm = (props) => {
         <DaysInput onChange={handleDaysChange} error={errors.daysError} />
         <Button label="Add" className="ml-4" type="submit" />
       </form>
-      {schedule.length > 0 && (
+      {schedule.length === 0 ? (
+        <p className="py-10 text-center opacity-80 bg-gray">
+          You don't have any times available on your schedule.
+        </p>
+      ) : (
         <table className="w-full text-center">
           <thead>
             <tr>
