@@ -8,8 +8,6 @@ export default connect()
   .post(async (request, response) => {
     const { userId, isDriver, isEmployee, isAdministrator } = request.body;
 
-    console.log(request);
-
     if (!request.user || !request.user.id) {
       return response
         .status(200)

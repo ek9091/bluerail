@@ -14,4 +14,12 @@ export const Ride = () => {
   );
 };
 
+export const getServerSideProps = async (context) => {
+  const { rideId } = context.params;
+
+  const { db } = require("../../lib/app/data-schema");
+
+  return { props: {} };
+};
+
 export default Ride;

@@ -23,7 +23,7 @@ export const ScheduledRides = () => {
           <h2 className="text-xl my-4 px-4">Scheduled Rides</h2>
           {rides.length > 0 &&
             rides.map((ride) => (
-              <div className="mb-3" key={ride.id}>
+              <div className="mb-3" key={ride.rideId}>
                 <Panel padding="6">
                   <RideDetails data={ride} />
                   <div className="text-right">
@@ -36,7 +36,7 @@ export const ScheduledRides = () => {
                     <Button
                       label="Update Ride"
                       variant="secondary"
-                      onClick={() => router.push(`/rides/${ride.id}`)}
+                      onClick={() => router.push(`/rides/${ride.rideId}`)}
                     />
                   </div>
                 </Panel>

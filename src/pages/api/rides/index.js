@@ -59,6 +59,7 @@ export default connect()
     try {
       const data = await db("ride")
         .select(
+          "ride.id as rideId",
           "user.id as userId",
           "user.first_name as userFirstName",
           "user.last_name as userLastName",
@@ -90,6 +91,7 @@ export default connect()
         .orderBy("ride.updated_at", "desc");
 
       const rides = data.map((ride) => ({
+        rideId: ride.rideId,
         userName: `${ride.userFirstName} ${ride.userLastName}`,
         driver: {
           driverName: `${ride.driverFirstName} ${ride.driverLastName}`,
