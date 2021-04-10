@@ -6,9 +6,9 @@ import { useRides, useAuth } from "../lib/app/util-hooks";
 
 export const RideHistory = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
-  if (isPending || !isAuthenticated) return null;
+  const { rides } = useRides({ history: true });
 
-  const { rides } = useRides();
+  if (isPending || !isAuthenticated) return null;
 
   const Ride = ({ ride }) => {
     const total = (ride.driver.driverFee * ride.rideLength).toLocaleString(

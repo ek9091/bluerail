@@ -8,14 +8,7 @@ const requestError = {
   },
 };
 
-const noRidersError = {
-  error: {
-    type: "noRidersError",
-    message: "There is no driver available at this time",
-  },
-};
-
-export const useRides = () => {
+export const useRides = ({ driver = false, history = false } = {}) => {
   const [rides, setRides] = useState([]);
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(false);
@@ -25,14 +18,12 @@ export const useRides = () => {
       setIsPending(true);
 
       try {
-        const response = await axios.post("/api/rides");
+        const response = await axios.get("/api/rides", {
+          params: { driver, history },
+        });
 
         if (response.status === 200) {
-          if (response.data.length === 0) {
-            setError(noRidersError);
-          } else {
-            setRides(response.data);
-          }
+          setRides(response.data);
         } else {
           setError(requestError);
         }

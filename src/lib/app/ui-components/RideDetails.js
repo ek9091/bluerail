@@ -1,10 +1,11 @@
 import React from "react";
+import moment from "moment";
 
 import { Hr } from "../../shared/ui-components";
 import { DriverDetails } from "./";
 
 export const RideDetails = ({ data, longform = false, driverView }) => {
-  const { rideFrom, rideTo, rideTime, driver, studentName } = data;
+  const { rideFrom, rideTo, rideTime, rideDate, driver, userName } = data;
 
   const DetailsRow = ({ label, value }) => {
     return (
@@ -42,7 +43,11 @@ export const RideDetails = ({ data, longform = false, driverView }) => {
         label="To"
         value={`${rideTo.street}, ${rideTo.city} ${rideTo.zipCode}`}
       />
-      <DetailsRow label="Time" value={rideTime} />
+      <DetailsRow label="Date" value={moment(rideDate).format("MM/DD/YYYY")} />
+      <DetailsRow
+        label="Time"
+        value={moment(`01/01/1970 ${rideTime}`).format("h:mm a")}
+      />
     </>
   );
 
@@ -69,7 +74,7 @@ export const RideDetails = ({ data, longform = false, driverView }) => {
     <>
       {rideDetails}
       {!driverView && driverDetails}
-      {driverView && <DetailsRow label="Student" value={studentName} />}
+      {driverView && <DetailsRow label="Student" value={userName} />}
     </>
   );
 };

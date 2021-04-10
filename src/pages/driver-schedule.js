@@ -7,7 +7,7 @@ import { useRides, useAuth } from "../lib/app/util-hooks";
 export const DriverSchedule = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
 
-  const { rides } = useRides();
+  const { rides } = useRides({ driver: true });
 
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
   const [acceptModalOpen, setAcceptModalOpen] = useState(false);

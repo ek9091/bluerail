@@ -7,13 +7,14 @@ import { useRides, useAuth } from "../lib/app/util-hooks";
 
 export const ScheduledRides = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
-  if (isPending || !isAuthenticated) return null;
 
   const router = useRouter();
   const { rides } = useRides();
 
   const [confirmModalOpen, setConfirmModalOpen] = useState(false);
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
+
+  if (isPending || !isAuthenticated) return null;
 
   return (
     <>
