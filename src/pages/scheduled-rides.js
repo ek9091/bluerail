@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 
 import { Panel, Button, Modal } from "../lib/shared/ui-components";
-import { AppLayout, RideDetails } from "../lib/app/ui-components";
+import { AppLayout as Layout, RideDetails } from "../lib/app/ui-components";
 import { useRides, useAuth } from "../lib/app/util-hooks";
 
 export const ScheduledRides = () => {
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
 
   const router = useRouter();
   const { rides, cancelRide } = useRides();
@@ -28,7 +28,7 @@ export const ScheduledRides = () => {
 
   return (
     <>
-      <AppLayout>
+      <Layout title="Scheduled Rides" roles={user.roles}>
         <Panel padding="3" color="gray">
           <h2 className="text-xl my-4 px-4">Scheduled Rides</h2>
           {rides.length === 0 ? (
@@ -63,7 +63,7 @@ export const ScheduledRides = () => {
             <Button label="Show more Rides" variant="secondary" />
           </div>
         </Panel>
-      </AppLayout>
+      </Layout>
       <Modal open={cancelRideId !== null} onClose={() => setCancelRideId(null)}>
         <p className="mb-10 text-xl">
           Are you sure you want to cancel this ride?

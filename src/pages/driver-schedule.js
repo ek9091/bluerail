@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 import { Panel, Button, Modal } from "../lib/shared/ui-components";
-import { AppLayout, RideDetails } from "../lib/app/ui-components";
+import { AppLayout as Layout, RideDetails } from "../lib/app/ui-components";
 import { useRides, useAuth } from "../lib/app/util-hooks";
 
 export const DriverSchedule = () => {
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
 
   const { rides, cancelRide, completeRide } = useRides({ driver: true });
 
@@ -40,7 +40,7 @@ export const DriverSchedule = () => {
 
   return (
     <>
-      <AppLayout title="Driver Schedule">
+      <Layout title="Driver Schedule" roles={user.roles}>
         <Panel padding="3" color="gray">
           <h1 className="text-xl my-4 px-4">Ride Schedule</h1>
           {rides.length === 0 ? (
@@ -75,7 +75,7 @@ export const DriverSchedule = () => {
             <Button label="Show more Rides" variant="secondary" />
           </div>
         </Panel>
-      </AppLayout>
+      </Layout>
       <Modal
         open={rejectRideId !== null}
         onClose={() => setRejectModalOpen(false)}

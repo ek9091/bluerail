@@ -6,7 +6,7 @@ import { Panel, Button, Modal, Loading } from "../../lib/shared/ui-components";
 import { useApplicants, useAuth } from "../../lib/app/util-hooks";
 
 export const Applicants = () => {
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
 
   const { applicants, isPending: isApplicantsPending } = useApplicants();
   const router = useRouter();
@@ -17,7 +17,7 @@ export const Applicants = () => {
 
   return (
     <>
-      <Layout title="Applicants">
+      <Layout title="Applicants" roles={user.roles}>
         <Panel color="gray" padding="3">
           <h1 className="text-xl my-4 px-4">Applicants</h1>
           {isApplicantsPending ? (

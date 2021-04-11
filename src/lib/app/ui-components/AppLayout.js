@@ -2,9 +2,8 @@ import React from "react";
 import Head from "next/head";
 
 import { Topnav, Sidenav } from "./";
-import { Panel } from "../../shared/ui-components";
 
-export const AppLayout = ({ children, title = "" }) => {
+export const AppLayout = ({ children, title = "", roles = [] }) => {
   return (
     <>
       <Head>
@@ -15,7 +14,7 @@ export const AppLayout = ({ children, title = "" }) => {
       </div>
       <div className="flex mx-auto max-w-6xl">
         <div className="flex-none w-56">
-          <Sidenav />
+          <Sidenav roles={roles} />
         </div>
         <div className="flex-grow px-4 pb-10">{children}</div>
         <div className="flex-none w-56"></div>

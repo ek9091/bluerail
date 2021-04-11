@@ -37,7 +37,7 @@ export const Applicant = (props) => {
     status,
   } = props;
 
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
   const [approveModalOpen, setApproveModalOpen] = useState(false);
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
   const [applicationStatus, setApplicationStatus] = useState(status);
@@ -67,7 +67,7 @@ export const Applicant = (props) => {
 
   return (
     <>
-      <Layout title="Applicant">
+      <Layout title="Applicant" roles={user.roles}>
         <Panel color="gray" padding="3">
           <Button
             variant="secondary"

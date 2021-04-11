@@ -13,7 +13,7 @@ import {
 import { useApplicationStatus } from "../lib/app/util-hooks";
 
 export const DriverApplication = () => {
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
 
   const license = createRef();
   const history = createRef();
@@ -186,7 +186,7 @@ export const DriverApplication = () => {
   );
 
   return (
-    <Layout title="Become a Driver">
+    <Layout title="Become a Driver" roles={user.roles}>
       <Panel padding="6">
         <h1 className="text-xl my-4">Driver Application</h1>
         {isApplicationPending ? (

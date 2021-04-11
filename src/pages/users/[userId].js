@@ -11,7 +11,7 @@ const Label = ({ name }) => {
 };
 
 export const User = (props) => {
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
   const router = useRouter();
   const adminRef = createRef();
   const employeeRef = createRef();
@@ -59,7 +59,7 @@ export const User = (props) => {
   }
 
   return (
-    <Layout title="User">
+    <Layout title="User" roles={user.roles}>
       <Panel padding="3" color="gray">
         <Button
           variant="secondary"

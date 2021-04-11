@@ -1,11 +1,11 @@
 import React from "react";
 
 import { Panel, Button } from "../lib/shared/ui-components";
-import { AppLayout, RideDetails } from "../lib/app/ui-components";
+import { AppLayout as Layout, RideDetails } from "../lib/app/ui-components";
 import { useRides, useAuth } from "../lib/app/util-hooks";
 
 export const RideHistory = () => {
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
   const { rides } = useRides({ history: true });
 
   if (isPending || !isAuthenticated) return null;
@@ -59,7 +59,7 @@ export const RideHistory = () => {
 
   return (
     <>
-      <AppLayout title="Ride History">
+      <Layout title="Ride History" roles={user.roles}>
         <Panel padding="3" color="gray">
           <h1 className="text-xl my-4 px-4">Ride History</h1>
           {rides.length > 0 &&
@@ -72,7 +72,7 @@ export const RideHistory = () => {
             <Button label="Show more Rides" variant="secondary" />
           </div>
         </Panel>
-      </AppLayout>
+      </Layout>
     </>
   );
 };

@@ -18,7 +18,7 @@ const Label = ({ name }) => {
 };
 
 export const DriverSettings = () => {
-  const { isAuthenticated, isPending: isAuthPending } = useAuth("/login");
+  const { isAuthenticated, isPending: isAuthPending, user } = useAuth("/login");
   const { isPending: isSettingsPending, settings } = useDriverSettings();
   const {
     schedule,
@@ -108,7 +108,7 @@ export const DriverSettings = () => {
   }
 
   return (
-    <Layout title="Driver Settings">
+    <Layout title="Driver Settings" roles={user.roles}>
       <Panel color="gray" padding="3">
         <h1 className="text-xl my-4 px-4">Driver Settings</h1>
         <Panel padding="6">

@@ -6,7 +6,7 @@ import { Panel, Button, SearchInput } from "../../lib/shared/ui-components";
 import { useUsers, useAuth } from "../../lib/app/util-hooks";
 
 export const Users = () => {
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
   const [query, setQuery] = useState("");
   const { users, isFetched } = useUsers(query);
   const router = useRouter();
@@ -14,7 +14,7 @@ export const Users = () => {
   if (isPending || !isAuthenticated) return null;
 
   return (
-    <Layout title="Users">
+    <Layout title="Users" roles={user.roles}>
       <Panel color="gray" padding="3">
         <h1 className="text-xl my-4 px-4">Users</h1>
         <div className="mb-4">

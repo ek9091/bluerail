@@ -7,11 +7,11 @@ import { AppLayout as Layout, RideRequest } from "../../lib/app/ui-components";
 export const Ride = (props) => {
   const { request = {}, error } = props;
 
-  const { isAuthenticated, isPending } = useAuth("/login");
+  const { isAuthenticated, isPending, user } = useAuth("/login");
   if (isPending || !isAuthenticated) return null;
 
   return (
-    <Layout title="Update ride">
+    <Layout title="Update ride" roles={user.roles}>
       {error !== "" ? (
         <Panel>
           <p className="text-center py-10">{error}</p>
