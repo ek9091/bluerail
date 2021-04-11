@@ -209,8 +209,6 @@ export async function getServerSideProps(context) {
     .join("user", "user.id", "=", "user_id")
     .where("application.id", applicationId);
 
-  console.log(application);
-
   if (!application) {
     return {
       props: {

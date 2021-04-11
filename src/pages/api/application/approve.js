@@ -11,8 +11,6 @@ export default connect().post(async (request, response) => {
     .first("id")
     .where({ user_id: userId, role: "driver" });
 
-  console.log(role);
-
   if (!role) {
     await db("role").insert({ user_id: userId, role: "driver" });
   }
