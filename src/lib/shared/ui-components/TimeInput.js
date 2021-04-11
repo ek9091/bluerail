@@ -3,25 +3,20 @@ import React, { useState, useRef, useEffect, forwardRef } from "react";
 import { FormError } from "./";
 
 export const TimeInput = forwardRef((props, ref) => {
-  const {
-    label,
-    error,
-    initialHour = "12",
-    initialMinute = "00",
-    initialPeriod = "AM",
-  } = props;
+  const { label, error, initialTime = "8:00 AM" } = props;
+
+  const parts = initialTime.split(/:|\s/);
 
   const [show, setShow] = useState(false);
-  const [hour, setHour] = useState(initialHour);
-  const [minute, setMinute] = useState(initialMinute);
-  const [period, setPeriod] = useState(initialPeriod);
+  const [hour, setHour] = useState(parts[0]);
+  const [minute, setMinute] = useState(parts[1]);
+  const [period, setPeriod] = useState(parts[2].toUpperCase());
   const node = useRef();
 
   const time = `${hour}:${minute} ${period}`;
 
   const handleDocumentClick = (evt) => {
     if (node.current.contains(evt.target)) return;
-
     setShow(false);
   };
 

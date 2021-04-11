@@ -13,6 +13,7 @@ export default connect()
     }
 
     const {
+      rideId = null,
       driverId,
       driverFee,
       fromId,
@@ -23,22 +24,44 @@ export default connect()
       amount,
     } = request.body;
 
-    try {
-      await db("ride").insert({
-        user_id: request.user.id,
-        driver_id: driverId,
-        driver_fee: driverFee,
-        from_id: fromId,
-        to_id: toId,
-        ride_time: moment(`01/01/1970 ${rideTime}`).format("HH:ss:mm"),
-        ride_date: moment(rideDate).format("YYYY-MM-DD"),
-        ride_length: rideLength,
-        amount,
-      });
+    console.log(rideId);
+    console.log(driverId);
 
-      response
-        .status(200)
-        .json({ success: "Your ride request has been submitted" });
+    try {
+      if (rideId === null) {
+        await db("ride").insert({
+          user_id: request.user.id,
+          driver_id: driverId,
+          driver_fee: driverFee,
+          from_id: fromId,
+          to_id: toId,
+          ride_time: moment(`01/01/1970 ${rideTime}`).format("HH:ss:mm"),
+          ride_date: moment(rideDate).format("YYYY-MM-DD"),
+          ride_length: rideLength,
+          amount,
+        });
+      } else {
+        await db("ride")
+          .update({
+            user_id: request.user.id,
+            driver_id: driverId,
+            driver_fee: driverFee,
+            from_id: fromId,
+            to_id: toId,
+            ride_time: moment(`01/01/1970 ${rideTime}`).format("HH:ss:mm"),
+            ride_date: moment(rideDate).format("YYYY-MM-DD"),
+            ride_length: rideLength,
+            amount,
+          })
+          .where({ id: rideId });
+      }
+
+      response.status(200).json({
+        success:
+          rideId !== null
+            ? "Your ride has been updated"
+            : "Your ride request has been submitted",
+      });
     } catch (error) {
       console.error(error);
       response

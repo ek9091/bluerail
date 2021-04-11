@@ -17,7 +17,10 @@ const defaultRequest = {
   driver: null,
 };
 
-export const RideRequest = ({ ride = null, heading = "Request a ride" }) => {
+export const RideRequest = ({
+  currentRequest = {},
+  heading = "Request a ride",
+}) => {
   const [success, setSuccess] = useState("");
   const [drivers, setDrivers] = useState([]);
   const [request, setRequest] = useState(defaultRequest);
@@ -66,7 +69,7 @@ export const RideRequest = ({ ride = null, heading = "Request a ride" }) => {
       rideDate,
     } = request;
 
-    const response = await axios.post("/api/rides", {
+    let data = {
       driverId: driver.driverId,
       driverFee: driver.driverFee,
       fromId: rideFrom.id,
@@ -75,7 +78,13 @@ export const RideRequest = ({ ride = null, heading = "Request a ride" }) => {
       rideTime,
       rideDate,
       amount: rideLength * driver.driverFee,
-    });
+    };
+
+    if (currentRequest.rideId) {
+      data.rideId = currentRequest.rideId;
+    }
+
+    const response = await axios.post("/api/rides", { ...data });
 
     if (response.data.success) {
       setSuccess(response.data.success);
@@ -91,7 +100,10 @@ export const RideRequest = ({ ride = null, heading = "Request a ride" }) => {
       {drivers.length === 0 ? (
         <Panel padding="8">
           <h1 className="text-xl mb-4">{heading}</h1>
-          <RequestRideForm onRideRequest={onRideRequest} />
+          <RequestRideForm
+            onRideRequest={onRideRequest}
+            currentRequest={currentRequest}
+          />
         </Panel>
       ) : request.driver === null ? (
         <Panel color="gray" padding="3">
@@ -130,6 +142,7 @@ export const RideRequest = ({ ride = null, heading = "Request a ride" }) => {
               note="You will only be charged after you
           have reached your destination."
               onPayment={handlePayment}
+              submitLabel={currentRequest.rideId ? "Update Request" : "Submit"}
             />
           </Panel>
         </Panel>

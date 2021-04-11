@@ -10,7 +10,12 @@ export const PaymentForm = (props) => {
   const [errors, setErrors] = useState({});
   const [isPending, setIsPending] = useState(false);
 
-  const { amount, onPayment = () => {}, note = "" } = props;
+  const {
+    amount,
+    onPayment = () => {},
+    note = "",
+    submitLabel = "Submit",
+  } = props;
 
   async function handlePayment(evt) {
     evt.preventDefault();
@@ -109,7 +114,7 @@ export const PaymentForm = (props) => {
           {note !== "" && <p className="text-sm">{note}</p>}
         </div>
         <div className="flex-none">
-          <Button label="Submit" type="submit" />
+          <Button label={submitLabel} type="submit" />
         </div>
       </div>
     </form>
