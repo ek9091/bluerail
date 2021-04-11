@@ -133,6 +133,8 @@ export default connect()
         rideTime: ride.rideTime,
         rideLength: ride.rideLength,
         amount: ride.amount,
+        rideStatus: ride.rideStatus,
+        paymentStatus: ride.paymentStatus,
       }));
 
       response.status(200).json([...rides]);

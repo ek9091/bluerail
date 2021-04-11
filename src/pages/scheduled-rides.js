@@ -68,7 +68,9 @@ export const ScheduledRides = () => {
         <p className="mb-10 text-xl">
           Are you sure you want to cancel this ride?
         </p>
-        {cancelError !== "" && <p className="py-4 bg-gray text-red">{error}</p>}
+        {cancelError !== "" && (
+          <p className="py-4 bg-gray text-red">{cancelError}</p>
+        )}
         <div className="text-right">
           <Button
             label="Yes, cancel ride"

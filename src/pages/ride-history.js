@@ -28,14 +28,29 @@ export const RideHistory = () => {
       <Panel padding="6">
         <RideDetails data={ride} />
         <div className="text-lg text-right">
-          <span className="text-blue uppercase text-sm w-12 mr-4">Total:</span>{" "}
-          {ride.rideLength} miles x {fee} = {total}{" "}
-          {ride.paymentCompleted ? (
-            <span className="text-green uppercase text-sm font-bold">Paid</span>
+          {ride.rideStatus !== -1 && (
+            <p className="mb-4">
+              <span className="text-blue uppercase text-sm w-12 mr-4">
+                Total:
+              </span>{" "}
+              {ride.rideLength} miles x {fee} = {total}
+            </p>
+          )}
+          {ride.rideStatus === -1 ? (
+            <p className="text-sm">
+              You were not charged
+              <span className="text-red uppercase text-xs p-2 inline-block bg-gray ml-4 font-bold">
+                Ride Rejected
+              </span>
+            </p>
+          ) : ride.paymentStatus === 1 ? (
+            <p className="text-green uppercase text-xs p-2 bg-gray inline-block font-bold">
+              Payment Processed
+            </p>
           ) : (
-            <span className="text-med-gray uppercase text-sm font-bold">
-              Pending
-            </span>
+            <p className="text-med-gray uppercase text-xs p-2 inline-block bg-gray font-bold">
+              Payment Pending
+            </p>
           )}
         </div>
       </Panel>

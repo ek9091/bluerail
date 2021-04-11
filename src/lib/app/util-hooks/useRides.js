@@ -24,6 +24,17 @@ export const useRides = ({ driver = false, history = false } = {}) => {
     return "";
   };
 
+  const completeRide = async (rideId) => {
+    const response = await axios.post("/api/rides/complete", { rideId });
+
+    if (response.data.error) {
+      return response.data.error;
+    }
+
+    setRides(rides.filter((ride) => ride.rideId !== rideId));
+    return "";
+  };
+
   useEffect(() => {
     const fetchRides = async () => {
       setIsPending(true);
@@ -49,7 +60,7 @@ export const useRides = ({ driver = false, history = false } = {}) => {
     fetchRides();
   }, []);
 
-  return { error, isPending, rides, cancelRide };
+  return { error, isPending, rides, cancelRide, completeRide };
 };
 
 export default useRides;
