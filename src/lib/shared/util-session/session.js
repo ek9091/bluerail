@@ -1,6 +1,6 @@
 import * as iron from "@hapi/iron";
 
-import { setCookie, getCookie } from "./cookie";
+import { setCookie, getCookie, removeCookie } from "./cookie";
 
 const sessionName = process.env.SESSION_NAME || "token";
 const sessionSecret = process.env.SESSION_SECRET;
@@ -43,6 +43,10 @@ export async function getSession(request) {
   } catch (error) {
     throw new Error(error);
   }
+}
+
+export function removeSession(response) {
+  removeCookie(sessionName, response);
 }
 
 export function createSessionMiddleware(authenticate) {

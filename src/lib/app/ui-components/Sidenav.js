@@ -90,7 +90,7 @@ export const Sidenav = (props) => {
             />
           </MenuItem>
         )}
-        {roles.some((role) => role.match(/^(employee|administrator)$/)) && (
+        {roles.includes("administrator") && (
           <MenuItem>
             <MenuOption icon="users" label="Users" href="/users" />
           </MenuItem>
