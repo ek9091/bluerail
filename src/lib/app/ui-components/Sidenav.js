@@ -43,13 +43,15 @@ export const Sidenav = (props) => {
             href="/ride-history"
           />
         </MenuItem>
-        <MenuItem>
-          <MenuOption
-            icon="file"
-            label="Become a Driver"
-            href="/driver-application"
-          />
-        </MenuItem>
+        {!roles.includes("driver") && (
+          <MenuItem>
+            <MenuOption
+              icon="file"
+              label="Become a Driver"
+              href="/driver-application"
+            />
+          </MenuItem>
+        )}
         {roles.includes("driver") && (
           <MenuItem separate>
             <h2 className="text-xs uppercase text-med-gray">Driver options</h2>

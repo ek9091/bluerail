@@ -62,12 +62,19 @@ export const RideHistory = () => {
       <Layout title="Ride History" roles={user.roles}>
         <Panel padding="3" color="gray">
           <h1 className="text-xl my-4 px-4">Ride History</h1>
-          {rides.length > 0 &&
+          {rides.length === 0 ? (
+            <Panel>
+              <p className="py-10 text-center">
+                There are no rides in your history at this time.
+              </p>
+            </Panel>
+          ) : (
             rides.map((ride) => (
               <div className="mb-3" key={ride.rideId}>
                 <Ride ride={ride} />
               </div>
-            ))}
+            ))
+          )}
           <div className="text-center px-4">
             <Button label="Show more Rides" variant="secondary" />
           </div>

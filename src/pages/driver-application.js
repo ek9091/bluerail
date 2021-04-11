@@ -211,7 +211,8 @@ export const DriverApplication = () => {
           <div className="text-center p-4">
             <h2 className="text-2xl mb-4">Application Sent!</h2>
             <p className="max-w-xs mx-auto">
-              Your application as been recieved. We will review it as soon as
+              Your application as been recieved. Please be sure to come back to
+              this page to check it's status. We will review it as soon as
               possible.
             </p>
           </div>

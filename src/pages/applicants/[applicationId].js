@@ -184,8 +184,8 @@ export const Applicant = (props) => {
 };
 
 export async function getServerSideProps(context) {
-  let { applicantId } = context.params;
-  applicantId = parseInt(applicantId);
+  let { applicationId } = context.params;
+  applicationId = parseInt(applicationId);
 
   const { db } = require("../../lib/app/data-schema");
 
@@ -207,7 +207,9 @@ export async function getServerSideProps(context) {
       "status"
     )
     .join("user", "user.id", "=", "user_id")
-    .where("user_id", applicantId);
+    .where("application.id", applicationId);
+
+  console.log(application);
 
   if (!application) {
     return {

@@ -7,5 +7,15 @@ export default connect().post(async (request, response) => {
 
   await db("application").update({ status: 1 }).where({ user_id: userId });
 
+  const role = await db("role")
+    .first("id")
+    .where({ user_id: userId, role: "driver" });
+
+  console.log(role);
+
+  if (!role) {
+    await db("role").insert({ user_id: userId, role: "driver" });
+  }
+
   response.status(200).json({ message: "application has been approved" });
 });
