@@ -9,19 +9,35 @@ export const ScheduledRides = () => {
   const { isAuthenticated, isPending } = useAuth("/login");
 
   const router = useRouter();
-  const { rides } = useRides();
-
-  const [confirmModalOpen, setConfirmModalOpen] = useState(false);
-  const [updateModalOpen, setUpdateModalOpen] = useState(false);
+  const { rides, cancelRide } = useRides();
+  const [cancelRideId, setCancelRideId] = useState(null);
+  const [cancelError, setCancelError] = useState("");
 
   if (isPending || !isAuthenticated) return null;
+
+  const handleCancelRide = async (id) => {
+    const error = await cancelRide(id);
+
+    if (error !== "") {
+      setCancelError(error);
+      return;
+    }
+
+    setCancelRideId(null);
+  };
 
   return (
     <>
       <AppLayout>
         <Panel padding="3" color="gray">
           <h2 className="text-xl my-4 px-4">Scheduled Rides</h2>
-          {rides.length > 0 &&
+          {rides.length === 0 ? (
+            <Panel>
+              <p className="py-10 text-center">
+                You have no scheduled rides at this time
+              </p>
+            </Panel>
+          ) : (
             rides.map((ride) => (
               <div className="mb-3" key={ride.rideId}>
                 <Panel padding="6">
@@ -31,7 +47,7 @@ export const ScheduledRides = () => {
                       label="Cancel Ride"
                       className="mr-2"
                       variant="warning"
-                      onClick={() => setConfirmModalOpen(true)}
+                      onClick={() => setCancelRideId(ride.rideId)}
                     />
                     <Button
                       label="Update Ride"
@@ -41,36 +57,31 @@ export const ScheduledRides = () => {
                   </div>
                 </Panel>
               </div>
-            ))}
+            ))
+          )}
           <div className="text-center px-4">
             <Button label="Show more Rides" variant="secondary" />
           </div>
         </Panel>
       </AppLayout>
-      <Modal open={confirmModalOpen} onClose={() => setConfirmModalOpen(false)}>
+      <Modal open={cancelRideId !== null} onClose={() => setCancelRideId(null)}>
         <p className="mb-10 text-xl">
           Are you sure you want to cancel this ride?
         </p>
+        {cancelError !== "" && <p className="py-4 bg-gray text-red">{error}</p>}
         <div className="text-right">
           <Button
             label="Yes, cancel ride"
             className="mr-2"
             variant="warning"
-            onClick={() => setConfirmModalOpen(false)}
+            onClick={() => handleCancelRide(cancelRideId)}
           />
           <Button
             label="No, do not cancel"
             variant="secondary"
-            onClick={() => setConfirmModalOpen(false)}
+            onClick={() => setCancelRideId(null)}
           />
         </div>
-      </Modal>
-      <Modal open={updateModalOpen} onClose={() => setUpdateModalOpen(false)}>
-        <p className="text-xl">
-          Updating a ride will be the same as requesting a ride. The only
-          difference being that an existing ride will be updated instead of a
-          new one being created.
-        </p>
       </Modal>
     </>
   );

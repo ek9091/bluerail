@@ -49,7 +49,7 @@ export const RideHistory = () => {
           <h1 className="text-xl my-4 px-4">Ride History</h1>
           {rides.length > 0 &&
             rides.map((ride) => (
-              <div className="mb-3" key={ride.id}>
+              <div className="mb-3" key={ride.rideId}>
                 <Ride ride={ride} />
               </div>
             ))}

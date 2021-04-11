@@ -24,9 +24,6 @@ export default connect()
       amount,
     } = request.body;
 
-    console.log(rideId);
-    console.log(driverId);
-
     try {
       if (rideId === null) {
         await db("ride").insert({

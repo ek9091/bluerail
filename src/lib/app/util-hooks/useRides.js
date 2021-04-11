@@ -13,6 +13,17 @@ export const useRides = ({ driver = false, history = false } = {}) => {
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState(false);
 
+  const cancelRide = async (rideId) => {
+    const response = await axios.post("/api/rides/cancel", { rideId });
+
+    if (response.data.error) {
+      return response.data.error;
+    }
+
+    setRides(rides.filter((ride) => ride.rideId !== rideId));
+    return "";
+  };
+
   useEffect(() => {
     const fetchRides = async () => {
       setIsPending(true);
@@ -38,7 +49,7 @@ export const useRides = ({ driver = false, history = false } = {}) => {
     fetchRides();
   }, []);
 
-  return { error, isPending, rides };
+  return { error, isPending, rides, cancelRide };
 };
 
 export default useRides;
