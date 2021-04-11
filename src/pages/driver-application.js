@@ -54,6 +54,8 @@ export const DriverApplication = () => {
 
     if (formData.license === "") {
       currentErrors.license = "License is required";
+    } else if (String(formData.license).length > 8) {
+      currentErrors.license = "License is too long";
     }
 
     if (formData.work === "") {
@@ -62,6 +64,24 @@ export const DriverApplication = () => {
 
     if (formData.firstRefName === "") {
       currentErrors.firstRefName = "Reference name is required";
+    }
+
+    if (
+      formData.firstRefPhone !== "" &&
+      !formData.firstRefPhone.match(
+        /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
+      )
+    ) {
+      currentErrors.firstRefPhone = "Phone number is invalid";
+    }
+
+    if (
+      formData.secRefPhone !== "" &&
+      !formData.secRefPhone.match(
+        /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
+      )
+    ) {
+      currentErrors.secRefPhone = "Phone number is invalid";
     }
 
     if (formData.firstRefPhone === "" && formData.firstRefEmail === "") {

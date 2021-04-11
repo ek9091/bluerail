@@ -39,10 +39,10 @@ export default connect()
       history,
       background,
       ref1_name: firstRefName,
-      ref1_phone: firstRefPhone,
+      ref1_phone: firstRefPhone.replace(/[^\d]/g, ""),
       ref1_email: firstRefEmail,
       ref2_name: secRefName,
-      ref2_phone: secRefPhone,
+      ref2_phone: secRefPhone.replace(/[^\d]/g, ""),
       ref2_email: secRefEmail,
     });
 
