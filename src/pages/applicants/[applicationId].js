@@ -34,13 +34,15 @@ export const Applicant = (props) => {
     ref2Name,
     ref2Phone,
     ref2Email,
-    status,
+    applicationStatus,
   } = props;
 
   const { isAuthenticated, isPending, user } = useAuth("/login");
   const [approveModalOpen, setApproveModalOpen] = useState(false);
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
-  const [applicationStatus, setApplicationStatus] = useState(status);
+  const [currentApplicationStatus, setCurrentApplicationStatus] = useState(
+    applicationStatus
+  );
   const router = useRouter();
 
   if (isPending || !isAuthenticated) return null;
@@ -49,7 +51,7 @@ export const Applicant = (props) => {
     const response = await axios.post("/api/application/approve", { userId });
 
     if (response.status === 200) {
-      setApplicationStatus(1);
+      setCurrentApplicationStatus(1);
     }
 
     setApproveModalOpen(false);
@@ -59,7 +61,7 @@ export const Applicant = (props) => {
     const response = await axios.post("/api/application/reject", { userId });
 
     if (response.status === 200) {
-      setApplicationStatus(-1);
+      setCurrentApplicationStatus(-1);
     }
 
     setRejectModalOpen(false);
@@ -120,10 +122,10 @@ export const Applicant = (props) => {
               </div>
             </div>
             <div className="text-center">
-              {applicationStatus === -1 && (
+              {currentApplicationStatus === -1 && (
                 <p className="text-red">Application has been rejected</p>
               )}
-              {applicationStatus === 1 && (
+              {currentApplicationStatus === 1 && (
                 <p className="text-green">Application has been approved</p>
               )}
             </div>
@@ -204,7 +206,7 @@ export async function getServerSideProps(context) {
       "ref2_name as ref2Name",
       "ref2_phone as ref2Phone",
       "ref2_email as ref2Email",
-      "status"
+      "application.status as appicationStatus"
     )
     .join("user", "user.id", "=", "user_id")
     .where("application.id", applicationId);
