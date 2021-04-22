@@ -61,11 +61,8 @@ export const PaymentForm = (props) => {
 
   return (
     <form onSubmit={handlePayment}>
-      <div className="flex justify-between items-center mb-2">
-        <div className="w-1/2">
-          <p className="text-center text-xs -mt-3 mb-2">
-            Below fields only need to be filled. <br /> Use dummy information.
-          </p>
+      <div className="md:flex justify-between items-center mb-2">
+        <div className="md:w-1/2">
           <TextInput
             label="Card holder"
             ref={cardHolderRef}
@@ -78,8 +75,8 @@ export const PaymentForm = (props) => {
             id="cardNumber"
             error={errors.cardNumberError}
           />
-          <div className="flex">
-            <div className="w-1/2 pr-1">
+          <div className="md:flex">
+            <div className="md:w-1/2 md:pr-1">
               <TextInput
                 label="Expiration"
                 ref={cardExpireRef}
@@ -87,7 +84,7 @@ export const PaymentForm = (props) => {
                 error={errors.cardExpireError}
               />
             </div>
-            <div className="w-1/2 pl-1">
+            <div className="md:w-1/2 md:pl-1">
               <TextInput
                 label="CVV"
                 ref={cardCVVRef}
@@ -97,7 +94,7 @@ export const PaymentForm = (props) => {
             </div>
           </div>
         </div>
-        <div className="w-1/2">
+        <div className="md:w-1/2 py-4 md:py-0">
           <div className="w-32 mx-auto">
             <p className="text-xs uppercase font-bold">Amount owed</p>
             <p className="text-2xl font-bold">
@@ -109,12 +106,16 @@ export const PaymentForm = (props) => {
           </div>
         </div>
       </div>
-      <div className="flex items-center">
-        <div className="flex-grow">
+      <div className="md:flex items-center">
+        <div className=" flex-grow">
           {note !== "" && <p className="text-sm">{note}</p>}
         </div>
         <div className="flex-none">
-          <Button label={submitLabel} type="submit" />
+          <Button
+            label={submitLabel}
+            type="submit"
+            className="block ml-auto mt-4 md:w-auto md:mt-0"
+          />
         </div>
       </div>
     </form>

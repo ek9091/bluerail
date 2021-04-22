@@ -7,7 +7,7 @@ const DriverCard = ({ driver, onDriverSelect, rideLength }) => {
   return (
     <Panel>
       <DriverDetails driver={driver} rideLength={rideLength} />
-      <div className="text-right">
+      <div className="text-right mt-4 md:mt-0">
         <Button label="Select Driver" onClick={() => onDriverSelect(driver)} />
       </div>
     </Panel>

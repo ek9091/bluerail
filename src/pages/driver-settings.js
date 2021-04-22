@@ -128,7 +128,7 @@ export const DriverSettings = () => {
                   )}
                 </div>
                 <Label name="Vehicle" />
-                <div className="flex justify-between mb-4">
+                <div className="md:flex justify-between mb-4">
                   <div className="flex-grow">
                     <TextInput
                       label="Make"
@@ -161,7 +161,7 @@ export const DriverSettings = () => {
                   <Label name="Vehicle Tags (separated by commas)" />
                   <TextInput label="Tags" ref={tagsRef} value="clean, luxury" />
                 </div>
-                <div className="flex justify-between mb-6">
+                <div className="md:flex justify-between mb-6">
                   <div className="flex-grow pr-1">
                     <Label name="Service Location" />
                     <AddressInput
@@ -193,7 +193,7 @@ export const DriverSettings = () => {
                     />
                   </div>
                 </div>
-                <div className="flex">
+                <div className="md:flex">
                   <div className="w-1/2">
                     <Label name="Drivers fee" />
                     <TextInput

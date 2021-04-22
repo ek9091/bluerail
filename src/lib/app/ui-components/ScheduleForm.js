@@ -63,7 +63,7 @@ export const ScheduleForm = (props) => {
   return (
     <>
       {errors.formError && <FormError message={errors.formError} />}
-      <div className="flex">
+      <div className="md:flex">
         <div className="w-1/2 pr-0.5">
           <TimeInput
             label="Start time"
@@ -82,7 +82,7 @@ export const ScheduleForm = (props) => {
         </div>
       </div>
       <form
-        className="flex justify-center items-start px-4 mb-8"
+        className="flex justify-center items-start md:px-4 mb-8"
         onSubmit={handleSubmit}
       >
         <DaysInput onChange={handleDaysChange} error={errors.daysError} />
@@ -93,7 +93,7 @@ export const ScheduleForm = (props) => {
           You don't have any times available on your schedule.
         </p>
       ) : (
-        <table className="w-full text-center">
+        <table className="w-full text-center overflow-x-auto min-w-2xl">
           <thead>
             <tr>
               <th>Start time</th>

@@ -71,9 +71,6 @@ export const DriverSchedule = () => {
               </div>
             ))
           )}
-          <div className="text-center px-4">
-            <Button label="Show more Rides" variant="secondary" />
-          </div>
         </Panel>
       </Layout>
       <Modal

@@ -93,15 +93,15 @@ export const RequestRideForm = ({ onRideRequest, currentRequest = {} }) => {
         error={errors.destination}
         id="destination"
       />
-      <div className="flex space-x-4">
-        <div className="w-1/2">
+      <div className="md:flex md:space-x-4">
+        <div className="md:w-1/2">
           <DateInput
             label="Enter your ride date"
             ref={dateRef}
             initialDate={new Date(rideDate)}
           />
         </div>
-        <div className="w-1/2">
+        <div className="md:w-1/2">
           <TimeInput
             label="Enter your ride time"
             ref={timeRef}

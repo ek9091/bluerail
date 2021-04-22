@@ -59,9 +59,6 @@ export const ScheduledRides = () => {
               </div>
             ))
           )}
-          <div className="text-center px-4">
-            <Button label="Show more Rides" variant="secondary" />
-          </div>
         </Panel>
       </Layout>
       <Modal open={cancelRideId !== null} onClose={() => setCancelRideId(null)}>

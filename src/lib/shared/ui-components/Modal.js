@@ -8,7 +8,7 @@ export const Modal = (props) => {
   if (!open) return null;
 
   return (
-    <div className="fixed left-0 top-0 flex items-center justify-center w-screen h-screen bg-black bg-opacity-80">
+    <div className="fixed left-0 top-0 flex items-center justify-center w-screen h-screen bg-black bg-opacity-80 z-50">
       <div className="w-full max-w-xl">
         <Panel>
           <div className="pt-5 pb-4 px-2">

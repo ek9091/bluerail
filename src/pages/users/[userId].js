@@ -89,7 +89,7 @@ export const User = (props) => {
               </div>
               <h2 className="text-lg mb-4">User roles</h2>
               <Hr />
-              <div className="flex space-x-6 mb-2">
+              <div className="md:flex space-y-2 md:space-y-0 md:space-x-6 mb-2">
                 <Checkbox
                   label="Administrator"
                   ref={adminRef}

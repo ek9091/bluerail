@@ -1,16 +1,10 @@
 import React from "react";
 import axios from "axios";
 
-import { Logo, MapSearch } from "./";
-import {
-  Appbar,
-  Menu,
-  MenuItem,
-  Button,
-  Icon,
-} from "../../shared/ui-components";
+import { Logo } from "./";
+import { Appbar, Button, Icon } from "../../shared/ui-components";
 
-export const Topnav = () => {
+export const Topnav = ({ onMenuOpen }) => {
   const handleLogout = async () => {
     await axios.get("/api/logout");
     window.location.replace("/login");
@@ -18,25 +12,17 @@ export const Topnav = () => {
 
   return (
     <Appbar>
+      <Button
+        variant="icon"
+        label={<Icon icon="bars" />}
+        onClick={onMenuOpen}
+      />
       <Logo />
-      {/* <div className="flex-grow px-4 max-w-3xl">
-        <MapSearch placeholder="Where to go..." />
-      </div> */}
-      <Menu>
-        <MenuItem>
-          <Button variant="icon" label={<Icon icon="bell" />} />
-        </MenuItem>
-        <MenuItem>
-          <Button variant="icon" label={<Icon icon="user" />} />
-        </MenuItem>
-        <MenuItem>
-          <Button
-            variant="icon"
-            label={<Icon icon="sign-out-alt" />}
-            onClick={handleLogout}
-          />
-        </MenuItem>
-      </Menu>
+      <Button
+        variant="icon"
+        label={<Icon icon="sign-out-alt" />}
+        onClick={handleLogout}
+      />
     </Appbar>
   );
 };

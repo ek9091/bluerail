@@ -9,9 +9,9 @@ export const RideDetails = ({ data, longform = false, driverView }) => {
 
   const DetailsRow = ({ label, value }) => {
     return (
-      <p className="mb-4">
+      <p className="flex mb-4">
         <span
-          className={`inline-block text-right mr-4 text-sm uppercase text-med-blue ${
+          className={`text-right mr-4 text-sm uppercase text-med-blue flex-none ${
             driverView ? "w-16" : "w-12"
           }`}
         >

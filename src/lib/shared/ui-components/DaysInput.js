@@ -37,10 +37,10 @@ export const DaysInput = (props) => {
 
   return (
     <div>
-      <ul className="flex space-x-2">
+      <ul className="flex flex-wrap space-x-2">
         {daysMap.map((day) => (
           <li
-            className={`rounded-full h-8 w-8 flex justify-center items-center cursor-pointer select-none ${
+            className={`rounded-full h-8 w-8 flex justify-center items-center cursor-pointer select-none mb-4 md:mb-0 ${
               days[day.key] ? "bg-blue text-white" : "bg-gray"
             }`}
             key={day.key}
