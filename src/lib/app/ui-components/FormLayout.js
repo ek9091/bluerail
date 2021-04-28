@@ -1,12 +1,9 @@
 import React from "react";
-import { useRouter } from "next/router";
 
-import { Button, Panel } from "../../shared/ui-components";
+import { Panel } from "../../shared/ui-components";
 import { Logo } from "./";
 
 export const FormLayout = ({ children, nav = null }) => {
-  const router = useRouter();
-
   return (
     <div className="h-screen w-screen">
       <div className="md:flex">

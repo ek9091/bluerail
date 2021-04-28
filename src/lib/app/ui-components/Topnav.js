@@ -16,6 +16,7 @@ export const Topnav = ({ onMenuOpen }) => {
         variant="icon"
         label={<Icon icon="bars" />}
         onClick={onMenuOpen}
+        className="inline-block md:hidden"
       />
       <Logo />
       <Button
